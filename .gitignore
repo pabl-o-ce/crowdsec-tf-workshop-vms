@@ -33,3 +33,4 @@ override.tf.json
 #terraform.tfvars  # variable file
 .env              # variable file
 *.pem             # Keys with pem extension
+changelog.config.js
