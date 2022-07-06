@@ -27,13 +27,13 @@ This command is used to see the changes that will take place on the infrastructu
 ```sh
 terraform plan
 ```
-### The third command to be used is 'terraform apply'
+#### The third command to be used is 'terraform apply'
 this command will create the resources on the AWS mentioned in the main.tf file.
 You will be prompted to provide your input to create the resources.
 ```sh
 terraform apply
 ```
-### Delete the created EC2 Instance using Terraform
+#### Delete the created EC2 Instance using Terraform
 If you no longer require resources you created using the configuration mentioned in the main.tf file, You can use the "terraform destroy" command to delete all those resources.
 ```sh
 terraform destroy
