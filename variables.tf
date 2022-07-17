@@ -22,7 +22,7 @@ variable "instance_type" {
 }
 # Name variable definition
 variable "instance_name" {
-        default = "crowdsec"
+        default = "CrowdSec"
 }
 # Subnet variable definition
 variable "subnet_id" {
