@@ -5,8 +5,8 @@
 - **image-id:** ami-0245697ee3e07e755
 - **instance-type:** t2.nano, t2.micro
 - **security-group-ids:** sg-08ed5268bfc2d63a3
-- **key-name:** MyEC2KeyPair
-- **user-data (sshbg):** https://github.com/klausagnoletti/cloud-init
+- **key-name:** CrowdSec
+- **user-data:** https://github.com/klausagnoletti/cloud-init
 - **number_of_instances:** 1
 
 ## Setup

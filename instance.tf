@@ -14,6 +14,8 @@ resource "aws_instance" "crowdsec_instance_attack" {
     user_data                   = file("${path.module}/user-data/workshop-attack.yml")
     tags = {
         Name                    = "${var.instance_name}-${count.index}"
+        Environment             = "CrowdSec Workshop"
+        OS                      = var.ami_id
     }
 }
 
@@ -23,8 +25,9 @@ resource "aws_instance" "crowdsec_instance_blank" {
     # Number of instances
     count                       = var.number_of_instances
     subnet_id                   = var.subnet_id
+    # Definition of instance type
     instance_type               = var.instance_type
-    # Definition of instances names
+    # Definition of instance names
     key_name                    = "${var.instance_name}${count.index}"
     vpc_security_group_ids      = var.security-group-ids
     associate_public_ip_address = true
@@ -32,6 +35,8 @@ resource "aws_instance" "crowdsec_instance_blank" {
     user_data                   = file("${path.module}/user-data/workshop-blank.yml")
     tags = {
         Name                    = "${var.instance_name}-${count.index}"
+        Environment             = "CrowdSec Workshop"
+        OS                      = var.ami_id
     }
 }
 
@@ -111,7 +116,7 @@ resource "aws_instance" "crowdsec_instance_blank" {
 #     }
 # }
 
-# Tutorial Videos Blan Instance
+# Tutorial Videos Blank Instance
 # resource "aws_instance" "crowdsec_instance" {
 #     ami                         = var.ami_id
 #     # Number of instances
