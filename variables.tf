@@ -1,24 +1,31 @@
-# Access key variable definition
-variable "access_key" {
-        description = "Access key to AWS console"
-}
-# Secret key variable definition
-variable "secret_key" {
-        description = "Secret key to AWS console"
-}
-# Profile variable definition
-variable "profile" {
-        default = "default"
+# AMI ID variable definition
+variable "ami_id" {
+        description = "The AMI to use"
+        sensitive = true
 }
 # AWS Region Key variable definition
 variable "aws_region" {
         description = "The AWS region to deploy the EC2 instance in."
-        default   = "us-east-1"
+        sensitive = true
 }
 # AWS Instance type variable definition
 variable "instance_type" {
         description = "instance type for ec2"
-        default   =  "t2.nano"
+        sensitive = true
+}
+# Access key variable definition
+variable "access_key" {
+        description = "Access key to AWS console"
+        sensitive = true
+}
+# Secret key variable definition
+variable "secret_key" {
+        description = "Secret key to AWS console"
+        sensitive = true
+}
+# Profile variable definition
+variable "profile" {
+        default = "default"
 }
 # Name variable definition
 variable "instance_name" {
@@ -33,11 +40,6 @@ variable "subnet_id" {
 variable "security-group-ids" {
         description = "The VPC subnet the instance(s) will be created in"
         default = "sg-08ed5268bfc2d63a3"
-}
-# AMI ID variable definition
-variable "ami_id" {
-        description = "The AMI to use"
-        default = "ami-0245697ee3e07e755"
 }
 # Number of instances variable definition
 variable "number_of_instances" {
