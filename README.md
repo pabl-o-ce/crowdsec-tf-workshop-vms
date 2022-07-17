@@ -13,8 +13,12 @@
 ### Get AWS Credentials Access key and Secret Key
 Once you get the keys you need to create and define terraform.tfvars
 ```sh
-echo "access_key = \"<accessKey>\"
-secret_key = \"<secretKey>\"" > ./terraform.tfvars
+echo "ami_id = \"<amiId>\"
+access_key = \"<accessKey>\"
+secret_key = \"<secretKey>\"
+credentials_path = \"~/User_Name/.aws/credentials\"
+aws_region = \"<region>\"
+instance_type = \"<instanceType>\"" > ./terraform.tfvars
 ```
 ### Create an EC2 Instance using the Terraform configuration files
 #### The first command to be used is 'terraform init'.
