@@ -2,10 +2,10 @@
 # Crowdsec Terraform in AWS for workshops
 ## Variables
 - **aws_region:** (need to set region, add this to terraform.tfvars below)
-- **ami_id:** ami-0245697ee3e07e755 (add this to terraform.tfvars below)
-- **instance_type:** t2.nano, t2.micro (add this to terraform.tfvars below)
 - **access_key:** (add this to terraform.tfvars below)
 - **secret_key:** (add this to terraform.tfvars below)
+- **ami_id:** ami-0245697ee3e07e755 (add this to terraform.tfvars below)
+- **instance_type:** t2.nano, t2.micro (add this to terraform.tfvars below)
 - **instance_name:** CrowdSec (change in variables.tf)
 - **security_group_ids:** sg-08ed5268bfc2d63a3 (change in variables.tf)
 - **subnet_id:** (change in variables.tf)
