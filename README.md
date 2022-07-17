@@ -10,7 +10,7 @@
 - **security_group_ids:** sg-08ed5268bfc2d63a3 (change in variables.tf)
 - **subnet_id:** (change in variables.tf)
 - **number_of_instances:** 1 (# of instances of workshop change in variables.tf)
-- **user-data:** https://github.com/klausagnoletti/cloud-init
+- **user_data:** https://github.com/klausagnoletti/cloud-init
 
 ## Setup
 ### Get AWS Credentials Access key and Secret Key
