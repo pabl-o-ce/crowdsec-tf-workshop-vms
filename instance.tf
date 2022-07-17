@@ -38,10 +38,13 @@ resource "aws_instance" "crowdsec_instance_blank" {
 # Tutorial Videos Wordpress Instance
 # resource "aws_instance" "crowdsec_instance" {
 #     ami                         = var.ami_id
+#     # Number of instances
 #     count                       = var.number_of_instances
 #     subnet_id                   = var.subnet_id
+#     # Definition of instances type
 #     instance_type               = var.instance_type
-#     key_name                    = "${var.instance_name}${index}"
+#     # Definition of instances names
+#     key_name                    = "${var.instance_name}${count.index}"
 #     vpc_security_group_ids      = var.security-group-ids
 #     associate_public_ip_address = true
 #     # Add the config you want to set based on cloud-init on user-data folder
@@ -54,10 +57,13 @@ resource "aws_instance" "crowdsec_instance_blank" {
 # Tutorial Videos SSHBF Instance
 # resource "aws_instance" "crowdsec_instance" {
 #     ami                         = var.ami_id
+#     # Number of instances
 #     count                       = var.number_of_instances
 #     subnet_id                   = var.subnet_id
+#     # Definition of instances type
 #     instance_type               = var.instance_type
-#     key_name                    = "${var.instance_name}${index}"
+#     # Definition of instances names
+#     key_name                    = "${var.instance_name}${count.index}"
 #     vpc_security_group_ids      = var.security-group-ids
 #     associate_public_ip_address = true
 #     # Add the config you want to set based on cloud-init on user-data folder
@@ -70,10 +76,13 @@ resource "aws_instance" "crowdsec_instance_blank" {
 # Tutorial Videos CrowdSec Latest Instance
 # resource "aws_instance" "crowdsec_instance" {
 #     ami                         = var.ami_id
+#     # Number of instances
 #     count                       = var.number_of_instances
 #     subnet_id                   = var.subnet_id
+#     # Definition of instances type
 #     instance_type               = var.instance_type
-#     key_name                    = "${var.instance_name}${index}"
+#     # Definition of instances names
+#     key_name                    = "${var.instance_name}${count.index}"
 #     vpc_security_group_ids      = var.security-group-ids
 #     associate_public_ip_address = true
 #     # Add the config you want to set based on cloud-init on user-data folder
@@ -86,10 +95,13 @@ resource "aws_instance" "crowdsec_instance_blank" {
 # Tutorial Videos CrowdSec Blank Instance
 # resource "aws_instance" "crowdsec_instance" {
 #     ami                         = var.ami_id
+#     # Number of instances
 #     count                       = var.number_of_instances
 #     subnet_id                   = var.subnet_id
+#     # Definition of instances type
 #     instance_type               = var.instance_type
-#     key_name                    = "${var.instance_name}${index}"
+#     # Definition of instances names
+#     key_name                    = "${var.instance_name}${count.index}"
 #     vpc_security_group_ids      = var.security-group-ids
 #     associate_public_ip_address = true
 #     # Add the config you want to set based on cloud-init on user-data folder
@@ -102,10 +114,13 @@ resource "aws_instance" "crowdsec_instance_blank" {
 # Tutorial Videos Blan Instance
 # resource "aws_instance" "crowdsec_instance" {
 #     ami                         = var.ami_id
+#     # Number of instances
 #     count                       = var.number_of_instances
 #     subnet_id                   = var.subnet_id
+#     # Definition of instances type
 #     instance_type               = var.instance_type
-#     key_name                    = "${var.instance_name}${index}"
+#     # Definition of instances names
+#     key_name                    = "${var.instance_name}${count.index}"
 #     vpc_security_group_ids      = var.security-group-ids
 #     associate_public_ip_address = true
 #     # Add the config you want to set based on cloud-init on user-data folder
@@ -118,10 +133,13 @@ resource "aws_instance" "crowdsec_instance_blank" {
 # Tutorial Videos Attack Instance
 # resource "aws_instance" "crowdsec_instance" {
 #     ami                         = var.ami_id
+#     # Number of instances
 #     count                       = var.number_of_instances
 #     subnet_id                   = var.subnet_id
+#     # Definition of instances type
 #     instance_type               = var.instance_type
-#     key_name                    = "${var.instance_name}${index}"
+#     # Definition of instances names
+#     key_name                    = "${var.instance_name}${count.index}"
 #     vpc_security_group_ids      = var.security-group-ids
 #     associate_public_ip_address = true
 #     # Add the config you want to set based on cloud-init on user-data folder
@@ -134,10 +152,13 @@ resource "aws_instance" "crowdsec_instance_blank" {
 # NPM VPS Instance
 # resource "aws_instance" "crowdsec_instance" {
 #     ami                         = var.ami_id
+#     # Number of instances
 #     count                       = var.number_of_instances
 #     subnet_id                   = var.subnet_id
+#     # Definition of instances type
 #     instance_type               = var.instance_type
-#     key_name                    = "${var.instance_name}${index}"
+#     # Definition of instances names
+#     key_name                    = "${var.instance_name}${count.index}"
 #     vpc_security_group_ids      = var.security-group-ids
 #     associate_public_ip_address = true
 #     # Add the config you want to set based on cloud-init on user-data folder
