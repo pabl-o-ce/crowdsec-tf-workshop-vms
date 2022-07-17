@@ -31,7 +31,7 @@ terraform plan
 this command will create the resources on the AWS mentioned in the main.tf file.
 You will be prompted to provide your input to create the resources.
 ```sh
-terraform apply
+terraform apply -var-file="terraform.tfvars"
 ```
 #### Delete the created EC2 Instance using Terraform
 If you no longer require resources you created using the configuration mentioned in the main.tf file, You can use the "terraform destroy" command to delete all those resources.
