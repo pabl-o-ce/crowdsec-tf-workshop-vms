@@ -1,17 +1,22 @@
 # Workshop Attacks Instance
 resource "aws_instance" "crowdsec_instance_attack" {
+    # Type of OS image
     ami                         = var.ami_id
     # Number of instances
     count                       = var.number_of_instances
+    # Subnet already define in AWS
     subnet_id                   = var.subnet_id
     # Definition of instances type
     instance_type               = var.instance_type
     # Definition of instances names
     key_name                    = "${var.instance_name}${count.index}"
+    # Security group already define in AWS
     vpc_security_group_ids      = var.security_group_ids
+    # Add a Public IP
     associate_public_ip_address = true
     # Add the config you want to set based on cloud-init on user-data folder
     user_data                   = file("${path.module}/user-data/workshop-attack.yml")
+    # Tags :)
     tags = {
         Name                    = "${var.instance_name}-${count.index}"
         Environment             = "CrowdSec Workshop"
@@ -21,18 +26,23 @@ resource "aws_instance" "crowdsec_instance_attack" {
 
 # Workshop Blank Instance
 resource "aws_instance" "crowdsec_instance_blank" {
+    # Type of OS image
     ami                         = var.ami_id
     # Number of instances
     count                       = var.number_of_instances
+    # Subnet already define in AWS
     subnet_id                   = var.subnet_id
     # Definition of instance type
     instance_type               = var.instance_type
     # Definition of instance names
     key_name                    = "${var.instance_name}${count.index}"
+    # Security group already define in AWS
     vpc_security_group_ids      = var.security_group_ids
+    # Add a Public IP
     associate_public_ip_address = true
     # Add the config you want to set based on cloud-init on user-data folder
     user_data                   = file("${path.module}/user-data/workshop-blank.yml")
+    # Tags :)
     tags = {
         Name                    = "${var.instance_name}-${count.index}"
         Environment             = "CrowdSec Workshop"
