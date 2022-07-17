@@ -1,0 +1,46 @@
+#cloud-config
+#set hostname
+fqdn: workshop
+#update all packages
+package_upgrade: true
+
+packages: 
+  - python3-pip #gdown needs pip
+  - docker.io #for metabase
+  - locales-all #disable annoying error message
+  - nginx
+
+#set up users
+users:
+  - name: klaus
+    shell: /bin/bash
+    sudo: ['ALL=(ALL) NOPASSWD:ALL']
+    ssh-authorized-keys:
+    - ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIO1QYZfvmPFlaxFVaOeSsGo4RgK+Yl7coaC8pb9xk/Vk klaus@macairlet.agnoletti.net
+    - ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIA6jshN/wPRhbhQkniFs5AvyVTLqJCkbEGElvDYulJ7j klaus@slimey
+    - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQC5PtFc36246Dihi2k2Rnf6pAhglTkdSBJa4O2ihu7eUwPz0kVmCpuHrVG307K9VFK0LcZsuMrSOMWxVJtbiN6/s/lJXt/+5kH7ypdM9xoUeSYLqdBtnsEdhefI2SrhQZK+JiLWKvZ1MjbJBmhurGsI2AoejQxN47T6w4GsMTV4HvPbkjx/3VGQKZcLI4J9MDU1F8JAHk2iQ1F/wc7OuWctLM7jL3FusWLPtjITti+fg3r7soiJilW1+lZ4ce9axh2vtDyHSnupK5w4iIVQYrCrPiVqhIwan+LNl1P3NM6sUFQlMjJJocohD3TtmfFeIHcPK1r3Zoi/Pe8y8yq5W2s+ugnUFbkF2kRdsNNOHsnIkAcU5+FSieBknPyE1YL1akQlqRskkT6DR502TCsNYWeLwquT8H0NxST9suoodqt3tWospxDuiTNEfDdGI+ptBWOKZiDqWVZRCdsfNKnOgFcrwEH8RKZ0Frbj7/YEJ0zm6+NBuYZV9Ij+qzneDVV+RMmK0Ulvei0HtAcz6iXOtMDyfPloyL1/R80vutU1tW+yZ3tkoFHA14/hhhokBd5ruEowjj1TPD0yCcFffKWybBONWe2HxF5LEqEqgjpNWT/3U1/bQ3ov7YXnX59p7Z0Xl3HQNWZ2JFDMuovTrRBkHCmObkm6MPSgJ9LUBMXZxWZbbQ== klaus@flaplet
+    - ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMItt5ehLmdPaNzxYw7PcxV2hQyD14MAgIQsF3RxWrAB klaus@slimey
+    - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDTVR/bTtTx4YxU+Hm87a+XF49XMEMvGJVd4p1IVUXUIuggoj+74C+17dq3wAShSn8QKu6PowNp9JFwrN3OaNV2R2xUpCiQqL1u/a9m53f1hD4WWsLcVMwL7CiJzqpXP0NbixTcFBJKiLV0u0dMC0y1LGBK0IKrJ66gccwxiHlD1XOdUWC+ip01dBuEebx0wwkZsXviwPBveZzEMsCI1dXgfaPowotRYThVC4jnczefu9gRSHC+372QvRyVhCrGStwElIrp0saa5jzP8X/cc/eGN+rn52tUiFNFABQraPOZC75nL/+PVy9dyiouKyWXk20lbARD9j/RPF8HKPH4HgMB klaus@nuclet
+  - name: robert
+    shell: /bin/bash
+    sudo: ['ALL=(ALL) NOPASSWD:ALL']
+    ssh-authorized-keys:
+    - ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIH2g4SuFvQLgBnyLDczneEe1IByJsH3z6AtHQvHyzKWu me@vrl.sh[11.Mar.2022]
+  - name: workshop
+    shell: /bin/bash
+    sudo: ['ALL=(ALL) NOPASSWD:ALL']
+    lock_passwd: false #if this is not set to false, user can't login!
+    passwd: "$6$JjzMB4JhhwsFm$JjSGQrO0EI86Eg0R3/TwfA7my2XSzGfF91CAYJJF234040RDK0KcEye9dmxYHTUAUdnuLPG9P5qHU3WIBcdFw0"
+
+#edit sshd_config and restart sshd (we need to enable PasswordAuthentication to be able to perform brute-force attack on ssh)
+runcmd:
+  - sed -i -e '/^PermitRootLogin/s/^.*$/PermitRootLogin no/' /etc/ssh/sshd_config #Make sure ssh root login is disabled
+  - sed -i -e '/^PasswordAuthentication/s/^.*$/PasswordAuthentication yes/' /etc/ssh/sshd_config #we want ssh to accept passwd so we can bruteforce it for testing crowdsec
+  - sed -i -e '/^PermitEmptyPasswords/s/^.*$/PermitEmptyPasswords no/' /etc/ssh/sshd_config #wants to make sure that login with empty passwords is not possiible
+  - service ssh restart
+  - pip3 install gdown #we need gdown to download a file from Google Drive to vps. Usage: gdown --id {gdrive_file_id} --output {file_name}
+  - gdown --id 18tfTKW_NGcGqhxB8YQjOgc3Jft03o3Mx --output /home/workshop/auth.log #download auth.log file for simulation
+  - gdown --id 1T8NARB2Fxm_cIxYHvsmLvgwfSzcdzph_ --output /home/workshop/access.log #download auth.log file for simulation
+  - passwd --expire workshop #expire workshop user to force password change
+  - sudo touch /var/lib/cloud/instance/locale-check.skip #disable annoying locale message on aws
+  - reboot
