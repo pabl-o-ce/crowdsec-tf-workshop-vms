@@ -1,23 +1,25 @@
 ![CrowdSec](https://app.crowdsec.net/vectors/crowdsec.svg "CrowdSec Logo") 
 # Crowdsec Terraform in AWS for workshops
-## Vars
-- **region:** us-east-1 (need to set region)
-- **image-id:** ami-0245697ee3e07e755
-- **instance-type:** t2.nano, t2.micro
-- **security-group-ids:** sg-08ed5268bfc2d63a3
-- **key-name:** CrowdSec
+## Variables
+- **aws_region:** (need to set region)
+- **image-id:** ami-0245697ee3e07e755 (add this to terraform.tfvars below)
+- **instance_type:** t2.nano, t2.micro (add this to terraform.tfvars below)
+- **access_key:** (add this to terraform.tfvars below)
+- **secret_key:** (add this to terraform.tfvars below)
+- **instance_name:** CrowdSec (change in variables.tf)
+- **security_group_ids:** sg-08ed5268bfc2d63a3 (change in variables.tf)
+- **subnet_id:** (change in variables.tf)
+- **number_of_instances:** 1 (# of instances of workshop change in variables.tf)
 - **user-data:** https://github.com/klausagnoletti/cloud-init
-- **number_of_instances:** 1
 
 ## Setup
 ### Get AWS Credentials Access key and Secret Key
 Once you get the keys you need to create and define terraform.tfvars
 ```sh
-echo "ami_id = \"<amiId>\"
-access_key = \"<accessKey>\"
+echo "access_key = \"<accessKey>\"
 secret_key = \"<secretKey>\"
-credentials_path = \"~/User_Name/.aws/credentials\"
 aws_region = \"<region>\"
+ami_id = \"<amiId>\"
 instance_type = \"<instanceType>\"" > ./terraform.tfvars
 ```
 ### Create an EC2 Instance using the Terraform configuration files
