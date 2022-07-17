@@ -16,7 +16,7 @@
 ### Get AWS Credentials Access key and Secret Key
 Once you get the keys you need to create and define terraform.tfvars
 ```sh
-echo "access_key = \"<accessKey>\"
+echo -e "access_key = \"<accessKey>\"
 secret_key = \"<secretKey>\"
 aws_region = \"<region>\"
 ami_id = \"<amiId>\"
