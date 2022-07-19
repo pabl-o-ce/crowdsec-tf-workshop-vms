@@ -11,7 +11,7 @@ resource "aws_instance" "crowdsec_instance_attack" {
     # Definition of instances names
     key_name                    = "${var.instance_name}${count.index}"
     # Security group already define in AWS
-    vpc_security_group_ids      = var.security_group_ids
+    vpc_security_group_ids      = "${var.security_group_ids}"
     # Add a Public IP
     associate_public_ip_address = true
     # Add the config you want to set based on cloud-init on user-data folder
@@ -37,7 +37,7 @@ resource "aws_instance" "crowdsec_instance_blank" {
     # Definition of instance names
     key_name                    = "${var.instance_name}${count.index}"
     # Security group already define in AWS
-    vpc_security_group_ids      = var.security_group_ids
+    vpc_security_group_ids      = "${var.security_group_ids}"
     # Add a Public IP
     associate_public_ip_address = true
     # Add the config you want to set based on cloud-init on user-data folder
