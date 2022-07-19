@@ -5,7 +5,7 @@ resource "aws_instance" "crowdsec_instance_attack" {
     # Number of instances
     count                       = var.number_of_instances
     # Subnet already define in AWS
-    subnet_id                   = var.subnet_id
+    # subnet_id                   = var.subnet_id
     # Definition of instances type
     instance_type               = var.instance_type
     # Definition of instances names SEARCH more
@@ -31,7 +31,7 @@ resource "aws_instance" "crowdsec_instance_blank" {
     # Number of instances
     count                       = var.number_of_instances
     # Subnet already define in AWS
-    subnet_id                   = var.subnet_id
+    # subnet_id                   = var.subnet_id
     # Definition of instance type
     instance_type               = var.instance_type
     # Definition of instance names
