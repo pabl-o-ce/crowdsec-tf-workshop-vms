@@ -59,7 +59,7 @@ resource "aws_network_interface_sg_attachment" "sg_attachment_attack" {
 resource "aws_network_interface_sg_attachment" "sg_attachment_defense" {
   count                         = var.number_of_instances
   security_group_id             = var.security_group_ids
-  network_interface_id          = aws_instance.crowdsec_instance_defense[count.index].primary_network_interface_id
+  network_interface_id          = aws_instance.crowdsec_instance_blank[count.index].primary_network_interface_id
 }
 
 # Tutorial Videos Wordpress Instance
