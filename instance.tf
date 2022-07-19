@@ -37,7 +37,7 @@ resource "aws_instance" "crowdsec_instance_blank" {
     # Definition of instance names
     key_name                    = "${var.instance_name}"
     # Security group already define in AWS
-    vpc_security_group_ids      = "${var.security_group_ids}"
+    # vpc_security_group_ids      = "${var.security_group_ids}"
     # Add a Public IP
     associate_public_ip_address = true
     # Add the config you want to set based on cloud-init on user-data folder
@@ -48,6 +48,18 @@ resource "aws_instance" "crowdsec_instance_blank" {
         Environment             = "CrowdSec Workshop Defense"
         OS                      = var.ami_defense
     }
+}
+
+resource "aws_security_group" "public_attack" {
+  count                         = var.number_of_instances
+  vpc_security_group_ids        = "${var.security_group_ids}"
+  network_interface_id          = aws_instance.crowdsec_instance_attack[count.index].primary_network_interface_id
+}
+
+resource "aws_security_group" "public_defense" {
+  count                         = var.number_of_instances
+  vpc_security_group_ids        = "${var.security_group_ids}"
+  network_interface_id          = aws_instance.crowdsec_instance_defense[count.index].primary_network_interface_id
 }
 
 # Tutorial Videos Wordpress Instance
