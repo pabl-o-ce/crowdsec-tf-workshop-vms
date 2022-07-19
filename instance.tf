@@ -52,13 +52,13 @@ resource "aws_instance" "crowdsec_instance_blank" {
 
 resource "aws_security_group" "public_attack" {
   count                         = var.number_of_instances
-  vpc_security_group_ids        = "${var.security_group_ids}"
+  security_group_id             = "${var.security_group_ids}"
   network_interface_id          = aws_instance.crowdsec_instance_attack[count.index].primary_network_interface_id
 }
 
 resource "aws_security_group" "public_defense" {
   count                         = var.number_of_instances
-  vpc_security_group_ids        = "${var.security_group_ids}"
+  security_group_id             = "${var.security_group_ids}"
   network_interface_id          = aws_instance.crowdsec_instance_defense[count.index].primary_network_interface_id
 }
 
