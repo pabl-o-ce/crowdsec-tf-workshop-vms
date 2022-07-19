@@ -46,8 +46,9 @@ variable "profile" {
         type = string
 }
 # Name variable definition
-variable "instance_name" {
-        default = "MyEC2KeyPair"
+variable "key_name" {
+        description = "Key name to AWS console"
+        sensitive = true
         type = string
 }
 # Subnet variable definition
