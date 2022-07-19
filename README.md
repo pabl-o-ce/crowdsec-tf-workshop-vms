@@ -14,8 +14,7 @@
 
 ## Setup
 ### Get AWS Credentials Access key and Secret Key
-Once you get the keys you need to create and define terraform.tfvars
-Create the file:
+Once you get the keys you need to create and define terraform.tfvars:
 ```
 touch ./terraform.tfvars
 ```
