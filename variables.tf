@@ -47,7 +47,7 @@ variable "profile" {
 }
 # Name variable definition
 variable "instance_name" {
-        default = "MyEC2KeyPair"
+        default = "CrowdSec"
         type = string
 }
 # Subnet variable definition
