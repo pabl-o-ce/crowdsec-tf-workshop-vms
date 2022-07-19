@@ -1,5 +1,5 @@
 ![CrowdSec](https://app.crowdsec.net/vectors/crowdsec.svg "CrowdSec Logo") 
-# Crowdsec Terraform for workhops
+# Crowdsec Terraform for workshops
 ## Variables for AWS
 - **aws_region:** (need to set region, add this to terraform.tfvars below)
 - **access_key:** (add this to terraform.tfvars below)
