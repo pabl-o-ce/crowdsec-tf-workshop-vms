@@ -1,7 +1,7 @@
 # Workshop Attacks Instance
 resource "aws_instance" "crowdsec_instance_attack" {
     # Type of OS image
-    ami                         = var.ami_attacks
+    ami                         = var.ami_attack
     # Number of instances
     count                       = var.number_of_instances
     # Subnet already define in AWS
@@ -20,7 +20,7 @@ resource "aws_instance" "crowdsec_instance_attack" {
     tags = {
         Name                    = "${var.instance_name}-attack-${count.index}"
         Environment             = "CrowdSec Workshop Attacker"
-        OS                      = var.ami_id
+        OS                      = var.ami_attack
     }
 }
 
@@ -46,7 +46,7 @@ resource "aws_instance" "crowdsec_instance_blank" {
     tags = {
         Name                    = "${var.instance_name}-defense-${count.index}"
         Environment             = "CrowdSec Workshop Defense"
-        OS                      = var.ami_id
+        OS                      = var.ami_defense
     }
 }
 
