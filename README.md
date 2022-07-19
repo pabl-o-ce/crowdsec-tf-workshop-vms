@@ -1,5 +1,5 @@
 ![CrowdSec](https://app.crowdsec.net/vectors/crowdsec.svg "CrowdSec Logo") 
-# Crowdsec Terraform for workshops
+# Crowdsec Terraform for workhops
 ## Variables for AWS
 - **aws_region:** (need to set region, add this to terraform.tfvars below)
 - **access_key:** (add this to terraform.tfvars below)
@@ -15,6 +15,11 @@
 ## Setup
 ### Get AWS Credentials Access key and Secret Key
 Once you get the keys you need to create and define terraform.tfvars
+Create the file:
+```
+touch ./terraform.tfvars
+```
+Add variable for AWS:
 ```sh
 echo -e "access_key = \"<accessKey>\"
 secret_key = \"<secretKey>\"
