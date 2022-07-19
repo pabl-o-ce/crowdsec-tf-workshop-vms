@@ -9,7 +9,7 @@ resource "aws_instance" "crowdsec_instance_attack" {
     # Definition of instances type
     instance_type               = var.instance_type
     # Definition of instances names
-    key_name                    = "${var.instance_name}${count.index}"
+    key_name                    = "${var.instance_name}"
     # Security group already define in AWS
     vpc_security_group_ids      = "${var.security_group_ids}"
     # Add a Public IP
@@ -35,7 +35,7 @@ resource "aws_instance" "crowdsec_instance_blank" {
     # Definition of instance type
     instance_type               = var.instance_type
     # Definition of instance names
-    key_name                    = "${var.instance_name}${count.index}"
+    key_name                    = "${var.instance_name}"
     # Security group already define in AWS
     vpc_security_group_ids      = "${var.security_group_ids}"
     # Add a Public IP
