@@ -11,7 +11,7 @@ resource "aws_instance" "crowdsec_instance_attack" {
     # Definition of instances names SEARCH more
     key_name                    = "${var.instance_name}"
     # Security group already define in AWS
-    vpc_security_group_ids      = "${var.security_group_ids}"
+    # vpc_security_group_ids      = "${var.security_group_ids}"
     # Add a Public IP
     associate_public_ip_address = true
     # Add the config you want to set based on cloud-init on user-data folder
@@ -50,15 +50,15 @@ resource "aws_instance" "crowdsec_instance_blank" {
     }
 }
 
-resource "aws_security_group" "public_attack" {
+resource "aws_network_interface_sg_attachment" "sg_attachment_attack" {
   count                         = var.number_of_instances
-  security_group_id             = "${var.security_group_ids}"
+  security_group_id             = var.security_group_ids
   network_interface_id          = aws_instance.crowdsec_instance_attack[count.index].primary_network_interface_id
 }
 
-resource "aws_security_group" "public_defense" {
+resource "aws_network_interface_sg_attachment" "sg_attachment_defense" {
   count                         = var.number_of_instances
-  security_group_id             = "${var.security_group_ids}"
+  security_group_id             = var.security_group_ids
   network_interface_id          = aws_instance.crowdsec_instance_defense[count.index].primary_network_interface_id
 }
 
