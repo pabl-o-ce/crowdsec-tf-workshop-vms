@@ -1,14 +1,14 @@
 # Workshop Attacks Instance
 resource "aws_instance" "crowdsec_instance_attack" {
     # Type of OS image
-    ami                         = var.ami_id
+    ami                         = var.ami_attacks
     # Number of instances
     count                       = var.number_of_instances
     # Subnet already define in AWS
     subnet_id                   = var.subnet_id
     # Definition of instances type
     instance_type               = var.instance_type
-    # Definition of instances names
+    # Definition of instances names SEARCH more
     key_name                    = "${var.instance_name}"
     # Security group already define in AWS
     vpc_security_group_ids      = "${var.security_group_ids}"
@@ -18,8 +18,8 @@ resource "aws_instance" "crowdsec_instance_attack" {
     user_data                   = file("${path.module}/user-data/workshop-attack.yml")
     # Tags :)
     tags = {
-        Name                    = "${var.instance_name}-${count.index}"
-        Environment             = "CrowdSec Workshop"
+        Name                    = "${var.instance_name}-attack-${count.index}"
+        Environment             = "CrowdSec Workshop Attacker"
         OS                      = var.ami_id
     }
 }
@@ -27,7 +27,7 @@ resource "aws_instance" "crowdsec_instance_attack" {
 # Workshop Blank Instance
 resource "aws_instance" "crowdsec_instance_blank" {
     # Type of OS image
-    ami                         = var.ami_id
+    ami                         = var.ami_defense
     # Number of instances
     count                       = var.number_of_instances
     # Subnet already define in AWS
@@ -44,8 +44,8 @@ resource "aws_instance" "crowdsec_instance_blank" {
     user_data                   = file("${path.module}/user-data/workshop-blank.yml")
     # Tags :)
     tags = {
-        Name                    = "${var.instance_name}-${count.index}"
-        Environment             = "CrowdSec Workshop"
+        Name                    = "${var.instance_name}-defense-${count.index}"
+        Environment             = "CrowdSec Workshop Defense"
         OS                      = var.ami_id
     }
 }

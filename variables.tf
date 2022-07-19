@@ -1,5 +1,17 @@
-# AMI ID variable definition
+# AMI ID variable defaule definition
 variable "ami_id" {
+        description = "The AMI to use"
+        sensitive = true
+        type = string
+}
+# AMI ID variable attacker definition
+variable "ami_attack" {
+        description = "The AMI to use"
+        sensitive = true
+        type = string
+}
+# AMI ID variable defense definition
+variable "ami_defense" {
         description = "The AMI to use"
         sensitive = true
         type = string
@@ -35,7 +47,7 @@ variable "profile" {
 }
 # Name variable definition
 variable "instance_name" {
-        default = "CrowdSec"
+        default = "MyEC2KeyPair"
         type = string
 }
 # Subnet variable definition
@@ -47,7 +59,7 @@ variable "subnet_id" {
 # Security-group-ids variable definition
 variable "security_group_ids" {
         description = "The VPC subnet the instance(s) will be created in"
-        default = "sg-08ed5268bfc2d63a3"
+        sensitive = true
         type = string
 }
 # Number of instances variable definition

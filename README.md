@@ -23,7 +23,8 @@ Add variable for AWS:
 echo -e "access_key = \"<accessKey>\"
 secret_key = \"<secretKey>\"
 aws_region = \"<region>\"
-ami_id = \"<amiId>\"
+ami_attack = \"<amiId>\"
+ami_defense = \"<amiId>\"
 instance_type = \"<instanceType>\"" > ./terraform.tfvars
 ```
 ### Create an EC2 Instance using the Terraform configuration files
