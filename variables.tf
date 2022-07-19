@@ -1,9 +1,9 @@
 # AMI ID variable defaule definition
-variable "ami_id" {
-        description = "The AMI to use"
-        sensitive = true
-        type = string
-}
+# variable "ami_id" {
+#         description = "The AMI to use"
+#         sensitive = true
+#         type = string
+# }
 # AMI ID variable attacker definition
 variable "ami_attack" {
         description = "The AMI to use"
