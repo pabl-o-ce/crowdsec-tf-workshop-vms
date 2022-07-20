@@ -4,13 +4,22 @@
 - **aws_region:** (need to set region, add this to terraform.tfvars below)
 - **access_key:** (add this to terraform.tfvars below)
 - **secret_key:** (add this to terraform.tfvars below)
-- **ami_id:** ami-0245697ee3e07e755 (add this to terraform.tfvars below)
+- **ami_id:** (add this to terraform.tfvars below)
 - **instance_type:** t2.nano, t2.micro (add this to terraform.tfvars below)
-- **instance_name:** CrowdSec (change in variables.tf)
-- **security_group_ids:** sg-08ed5268bfc2d63a3 (change in variables.tf)
+- **key_name:** (change in variables.tf)
+- **security_group_ids:** (change in variables.tf)
 - **subnet_id:** (change in variables.tf)
-- **number_of_instances:** 1 (# of instances of workshop change in variables.tf)
+- **number_of_instances:** (# of instances of workshop change in variables.tf)
 - **user_data:** https://github.com/klausagnoletti/cloud-init
+
+## Variables for Digital Ocean
+- **key:**
+## Variables for Oracle Cloud
+- **key:**
+## Variables for Linode
+- **key:**
+## Variables for TransIP
+- **key:**
 
 ## Setup
 ### Get AWS Credentials Access key and Secret Key
