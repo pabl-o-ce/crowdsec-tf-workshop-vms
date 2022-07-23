@@ -4,21 +4,17 @@ resource "aws_instance" "crowdsec_instance_attack" {
     ami                         = var.ami_attack
     # Number of instances
     count                       = var.number_of_instances
-    # Subnet already define in AWS
-    # subnet_id                   = var.subnet_id
     # Definition of instances type
     instance_type               = var.instance_type
-    # Definition of instances names SEARCH more
+    # Definition of key name
     key_name                    = "${var.key_name}"
-    # Security group already define in AWS
-    # vpc_security_group_ids      = "${var.security_group_ids}"
     # Add a Public IP
     associate_public_ip_address = true
     # Add the config you want to set based on cloud-init on user-data folder
     user_data                   = file("${path.module}/user-data/workshop-attack.yml")
     # Tags :)
     tags = {
-        Name                    = "attacker${count.index}"
+        Name                    = "attacker${count.index+1}"
         Environment             = "CrowdSec Workshop Attacker"
         OS                      = var.ami_attack
     }
@@ -30,32 +26,28 @@ resource "aws_instance" "crowdsec_instance_blank" {
     ami                         = var.ami_defense
     # Number of instances
     count                       = var.number_of_instances
-    # Subnet already define in AWS
-    # subnet_id                   = var.subnet_id
     # Definition of instance type
     instance_type               = var.instance_type
-    # Definition of instance names
+    # Definition of key name
     key_name                    = "${var.key_name}"
-    # Security group already define in AWS
-    # vpc_security_group_ids      = "${var.security_group_ids}"
     # Add a Public IP
     associate_public_ip_address = true
     # Add the config you want to set based on cloud-init on user-data folder
     user_data                   = file("${path.module}/user-data/workshop-blank.yml")
     # Tags :)
     tags = {
-        Name                    = "defender${count.index}"
+        Name                    = "defender${count.index+1}"
         Environment             = "CrowdSec Workshop Defender"
         OS                      = var.ami_defense
     }
 }
-
+# Security group already define in AWS attack instances
 resource "aws_network_interface_sg_attachment" "sg_attachment_attack" {
   count                         = var.number_of_instances
   security_group_id             = var.security_group_ids
   network_interface_id          = aws_instance.crowdsec_instance_attack[count.index].primary_network_interface_id
 }
-
+# Security group already define in AWS Blank/Defender instances
 resource "aws_network_interface_sg_attachment" "sg_attachment_defense" {
   count                         = var.number_of_instances
   security_group_id             = var.security_group_ids
