@@ -18,13 +18,13 @@ resource "aws_instance" "crowdsec_instance_attack" {
     user_data                   = file("${path.module}/user-data/workshop-attack.yml")
     # Tags :)
     tags = {
-        Name                    = "CrowdSec-attack-${count.index}"
+        Name                    = "attacker${count.index}"
         Environment             = "CrowdSec Workshop Attacker"
         OS                      = var.ami_attack
     }
 }
 
-# Workshop Blank Instance
+# Workshop Blank/Defender Instance
 resource "aws_instance" "crowdsec_instance_blank" {
     # Type of OS image
     ami                         = var.ami_defense
@@ -44,8 +44,8 @@ resource "aws_instance" "crowdsec_instance_blank" {
     user_data                   = file("${path.module}/user-data/workshop-blank.yml")
     # Tags :)
     tags = {
-        Name                    = "CrowdSec-defense-${count.index}"
-        Environment             = "CrowdSec Workshop Defense"
+        Name                    = "defender${count.index}"
+        Environment             = "CrowdSec Workshop Defender"
         OS                      = var.ami_defense
     }
 }
