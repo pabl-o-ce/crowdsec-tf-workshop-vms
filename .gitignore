@@ -30,6 +30,7 @@ override.tf.json
 #*.tfstate         # Infrastructure condition
 #*.tfstate.backup  # Infrastructure state backup
 #.terraform/       # Terraform module directories
+.terraform.lock.hcl
 terraform.tfvars
 .env
 *.pem
