@@ -54,8 +54,8 @@ variable "number_of_instances" {
         type = number
 }
 ####------ Digital Ocean variables
-variable "do_token" {
-        description = "Digital Ocean token"
-        sensitive = true
-        type = string
-}
+# variable "do_token" {
+#         description = "Digital Ocean token"
+#         sensitive = true
+#         type = string
+# }

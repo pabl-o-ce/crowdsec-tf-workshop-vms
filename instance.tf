@@ -19,7 +19,6 @@ resource "aws_instance" "crowdsec_instance_attack" {
         OS                      = var.ami_attack
     }
 }
-
 # Workshop Blank/Defender Instance
 resource "aws_instance" "crowdsec_instance_blank" {
     # Type of OS image
@@ -53,10 +52,10 @@ resource "aws_network_interface_sg_attachment" "sg_attachment_defense" {
   security_group_id             = var.security_group_ids
   network_interface_id          = aws_instance.crowdsec_instance_blank[count.index].primary_network_interface_id
 }
-
+# Get information abouts instances after they created
 output "crowdsec_workshop_info" {
   description = "CrowdSec Workshop info"
-  value = "attacker public_ip: " + aws_instance.crowdsec_instance_attack[count.index].public_ip + " attacker public_dns: " + aws_instance.crowdsec_instance_attack[count.index].public_dns + " blank/defender ip: " + aws_instance.crowdsec_instance_blank[count.index].public_ip
+  value = "attacker_public_ip: ${aws_instance.crowdsec_instance_attack[count.index].public_ip} attacker_public_dns: ${aws_instance.crowdsec_instance_attack[count.index].public_dns} blank_defender_ip: ${aws_instance.crowdsec_instance_blank[count.index].public_ip}"
 }
 
 # Tutorial Videos Wordpress Instance
