@@ -39,8 +39,8 @@ runcmd:
   - sed -i -e '/^PermitEmptyPasswords/s/^.*$/PermitEmptyPasswords no/' /etc/ssh/sshd_config #wants to make sure that login with empty passwords is not possiible
   - service ssh restart
   - pip3 install gdown #we need gdown to download a file from Google Drive to vps. Usage: gdown --id {gdrive_file_id} --output {file_name}
-  - gdown --id 18tfTKW_NGcGqhxB8YQjOgc3Jft03o3Mx --output /home/workshop/auth.log #download auth.log file for simulation
-  - gdown --id 1T8NARB2Fxm_cIxYHvsmLvgwfSzcdzph_ --output /home/workshop/access.log #download auth.log file for simulation
+  - gdown --id 18tfTKW_NGcGqhxB8YQjOgc3Jft03o3Mx --output /home/defender/auth.log #download auth.log file for simulation
+  - gdown --id 1T8NARB2Fxm_cIxYHvsmLvgwfSzcdzph_ --output /home/defender/access.log #download auth.log file for simulation
   - passwd --expire workshop #expire workshop user to force password change
   - sudo touch /var/lib/cloud/instance/locale-check.skip #disable annoying locale message on aws
   # - curl -fsSL https://get.docker.com | sh #outcommented as there seems to be issues with metabase in cscli
