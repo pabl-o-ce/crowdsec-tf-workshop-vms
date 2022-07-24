@@ -54,6 +54,11 @@ resource "aws_network_interface_sg_attachment" "sg_attachment_defense" {
   network_interface_id          = aws_instance.crowdsec_instance_blank[count.index].primary_network_interface_id
 }
 
+output "crowdsec_workshop_info" {
+  description = "CrowdSec Workshop info"
+  value = "attacker public_ip: " + aws_instance.crowdsec_instance_attack[count.index].public_ip + " attacker public_dns: " + aws_instance.crowdsec_instance_attack[count.index].public_dns + " blank/defender ip: " + aws_instance.crowdsec_instance_blank[count.index].public_ip
+}
+
 # Tutorial Videos Wordpress Instance
 # resource "aws_instance" "crowdsec_instance" {
 #     ami                         = var.ami_id
