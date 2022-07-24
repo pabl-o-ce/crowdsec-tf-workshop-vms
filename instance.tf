@@ -15,7 +15,7 @@ resource "aws_instance" "crowdsec_instance_attack" {
     # Tags :)
     tags = {
         Name                    = (count.index<9) ? "attacker0${(count.index+1)}" : "attacker${(count.index+1)}"
-        Environment             = "CrowdSec Workshop [Attacker]"
+        Environment             = "CrowdSec Workshop"
         OS                      = var.ami_attack
     }
 }
@@ -36,7 +36,7 @@ resource "aws_instance" "crowdsec_instance_blank" {
     # Tags :)
     tags = {
         Name                    = (count.index<9) ? "defender0${(count.index+1)}" : "defender${(count.index+1)}"
-        Environment             = "CrowdSec Workshop [Blank/Defender]"
+        Environment             = "CrowdSec Workshop"
         OS                      = var.ami_defense
     }
 }
