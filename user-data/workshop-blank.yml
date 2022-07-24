@@ -1,6 +1,6 @@
 #cloud-config
 #set hostname
-fqdn: workshop
+fqdn: defender
 #update all packages
 package_upgrade: true
 
