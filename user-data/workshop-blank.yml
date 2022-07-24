@@ -6,6 +6,7 @@ package_upgrade: true
 
 packages: 
   - python3-pip #gdown needs pip
+  - docker.io #for metabase
   - locales-all #disable annoying error message
   - nginx
 
@@ -42,7 +43,7 @@ runcmd:
   - gdown --id 1T8NARB2Fxm_cIxYHvsmLvgwfSzcdzph_ --output /home/workshop/access.log #download auth.log file for simulation
   - passwd --expire workshop #expire workshop user to force password change
   - sudo touch /var/lib/cloud/instance/locale-check.skip #disable annoying locale message on aws
-  - curl -fsSL https://get.docker.com | sh
+  # - curl -fsSL https://get.docker.com | sh #outcommented as there seems to be issues with metabase in cscli
   - docker pull bkimminich/juice-shop
   - docker run -d -p 4000:3000 bkimminich/juice-shop
   - gpasswd -M klaus,robert,workshop docker # add users to docker group for unprivileged container management
