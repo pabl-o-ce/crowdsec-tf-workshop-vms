@@ -8,7 +8,6 @@
 - **instance_type:** t2.nano, t2.micro (add this to terraform.tfvars below)
 - **key_name:** (add this to terraform.tfvars below)
 - **security_group_ids:** (add this to terraform.tfvars below)
-- **subnet_id:** (change in variables.tf)
 - **number_of_instances:** (# of instances of workshop change in variables.tf)
 - **user_data:** https://github.com/klausagnoletti/cloud-init
 
