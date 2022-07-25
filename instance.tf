@@ -15,7 +15,7 @@ resource "aws_instance" "crowdsec_instance_attack" {
   # Add tags
   tags = {
       Name                    = (count.index<9) ? "attacker0${(count.index+1)}" : "attacker${(count.index+1)}"
-      Environment             = "CrowdSec Workshop"
+      Environment             = "CrowdSec workshop"
       OS                      = var.ami_attack
   }
 }
@@ -36,20 +36,26 @@ resource "aws_instance" "crowdsec_instance_defender" {
   # Add tags
   tags = {
       Name                    = (count.index<9) ? "defender0${(count.index+1)}" : "defender${(count.index+1)}"
-      Environment             = "CrowdSec Workshop"
+      Environment             = "CrowdSec workshop"
       OS                      = var.ami_defense
   }
 }
-# Security group already defined in AWS attack instances
+# Security group already defined for AWS attack instances
 resource "aws_network_interface_sg_attachment" "sg_attachment_attack" {
+  # Add number of instances
   count                       = var.number_of_instances
+  # Add security group id
   security_group_id           = var.security_group_ids
+  # Add network interface id attachment to instances
   network_interface_id        = aws_instance.crowdsec_instance_attack[count.index].primary_network_interface_id
 }
-# Security group already defined in AWS defender instances
+# Security group already defined for AWS defender instances
 resource "aws_network_interface_sg_attachment" "sg_attachment_defense" {
+  # Add number of instances
   count                       = var.number_of_instances
+  # Add security group id
   security_group_id           = var.security_group_ids
+  # Add network interface id attachment to instances
   network_interface_id        = aws_instance.crowdsec_instance_defender[count.index].primary_network_interface_id
 }
 # Get all instances output
