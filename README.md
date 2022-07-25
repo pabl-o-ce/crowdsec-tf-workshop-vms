@@ -1,15 +1,14 @@
 ![CrowdSec](https://app.crowdsec.net/vectors/crowdsec.svg "CrowdSec Logo") 
 # Crowdsec Terraform for workshops
 ## Variables for AWS
-- **aws_region:** (need to set region, add this to terraform.tfvars below)
-- **access_key:** (add this to terraform.tfvars below)
-- **secret_key:** (add this to terraform.tfvars below)
-- **ami_id:** (add this to terraform.tfvars below)
-- **instance_type:** t2.nano, t2.micro (add this to terraform.tfvars below)
-- **key_name:** (change in variables.tf)
-- **security_group_ids:** (change in variables.tf)
-- **subnet_id:** (change in variables.tf)
-- **number_of_instances:** (# of instances of workshop change in variables.tf)
+- **aws_region:** set in [__***terraform.tfvars***__] file
+- **access_key:** set in [__***terraform.tfvars***__] file
+- **secret_key:** set in [__***terraform.tfvars***__] file
+- **ami_id:** set in [__***terraform.tfvars***__] file
+- **instance_type:** set in [__***terraform.tfvars***__] file
+- **key_name:** set in [__***terraform.tfvars***__] file
+- **security_group_ids:** set in [__***terraform.tfvars***__] file
+- **number_of_instances:** set in [__***variables.tf***__] file
 - **user_data:** https://github.com/klausagnoletti/cloud-init
 
 ## Variables for Digital Ocean
@@ -32,9 +31,11 @@ Add variable for AWS:
 echo -e "access_key = \"<accessKey>\"
 secret_key = \"<secretKey>\"
 aws_region = \"<region>\"
+key_name = \"<keyName>\"
 ami_attack = \"<amiId>\"
 ami_defense = \"<amiId>\"
-instance_type = \"<instanceType>\"" > ./terraform.tfvars
+instance_type = \"<instanceType>\"
+security_group_ids = \"<securityGroupIds>\"" > ./terraform.tfvars
 ```
 ### Create an EC2 Instance using the Terraform configuration files
 #### The first command to be used is 'terraform init'.
@@ -45,16 +46,16 @@ terraform init
 #### The second command to be used is 'terraform plan'.
 This command is used to see the changes that will take place on the infrastructure.
 ```sh
-terraform plan
+terraform plan --auto-approve
 ```
 #### The third command to be used is 'terraform apply'
 this command will create the resources on the AWS mentioned in the main.tf file.
 You will be prompted to provide your input to create the resources.
 ```sh
-terraform apply -var-file="terraform.tfvars"
+terraform apply -var-file="terraform.tfvars" --auto-approve
 ```
 #### Delete the created EC2 Instance using Terraform
 If you no longer require resources you created using the configuration mentioned in the main.tf file, You can use the "terraform destroy" command to delete all those resources.
 ```sh
-terraform destroy
+terraform destroy --auto-approve
 ```
