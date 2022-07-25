@@ -1,39 +1,39 @@
-# Workshop Attacker Instance
+# Workshop attacker instance
 resource "aws_instance" "crowdsec_instance_attack" {
-    # Type of OS image
-    ami                         = var.ami_attack
-    # Number of instances
+    # Add number of instances
     count                       = var.number_of_instances
-    # Definition of instances type
+    # Add image type
+    ami                         = var.ami_attack
+    # Add instances type
     instance_type               = var.instance_type
-    # Definition of key name
+    # Add key name
     key_name                    = "${var.key_name}"
-    # Add a Public IP
+    # Add public ip
     associate_public_ip_address = true
-    # Add the config you want to set based on cloud-init on user-data folder
+    # Add cloud-init on user-data folder
     user_data                   = file("${path.module}/user-data/workshop-attack.yml")
-    # Tags :)
+    # Add tags
     tags = {
         Name                    = (count.index<9) ? "attacker0${(count.index+1)}" : "attacker${(count.index+1)}"
         Environment             = "CrowdSec Workshop"
         OS                      = var.ami_attack
     }
 }
-# Workshop Blank/Defender Instance
-resource "aws_instance" "crowdsec_instance_blank" {
-    # Type of OS image
-    ami                         = var.ami_defense
-    # Number of instances
+# Workshop defender instance
+resource "aws_instance" "crowdsec_instance_defender" {
+    # Add number of instances
     count                       = var.number_of_instances
-    # Definition of instance type
+    # Add image type
+    ami                         = var.ami_defense
+    # Add instance type
     instance_type               = var.instance_type
-    # Definition of key name
+    # Add key name
     key_name                    = "${var.key_name}"
-    # Add a Public IP
+    # Add public ip
     associate_public_ip_address = true
-    # Add the config you want to set based on cloud-init on user-data folder
+    # Add cloud-init on user-data folder
     user_data                   = file("${path.module}/user-data/workshop-blank.yml")
-    # Tags :)
+    # Add tags
     tags = {
         Name                    = (count.index<9) ? "defender0${(count.index+1)}" : "defender${(count.index+1)}"
         Environment             = "CrowdSec Workshop"
@@ -46,38 +46,50 @@ resource "aws_network_interface_sg_attachment" "sg_attachment_attack" {
   security_group_id             = var.security_group_ids
   network_interface_id          = aws_instance.crowdsec_instance_attack[count.index].primary_network_interface_id
 }
-# Security group already define in AWS Blank/Defender instances
+# Security group already define in AWS defender instances
 resource "aws_network_interface_sg_attachment" "sg_attachment_defense" {
   count                         = var.number_of_instances
   security_group_id             = var.security_group_ids
-  network_interface_id          = aws_instance.crowdsec_instance_blank[count.index].primary_network_interface_id
+  network_interface_id          = aws_instance.crowdsec_instance_defender[count.index].primary_network_interface_id
 }
-# Get information abouts instances after they created
+# Get all instances output
 output "crowdsec_workshop_info" {
-  description = "CrowdSec Workshop info"
+  description = "CrowdSec workshop info"
   value = [aws_instance.crowdsec_instance_attack.*.public_ip,
           aws_instance.crowdsec_instance_attack.*.public_dns,
-          aws_instance.crowdsec_instance_blank.*.public_ip,
-          aws_instance.crowdsec_instance_blank.*.public_dns]
+          aws_instance.crowdsec_instance_defender.*.public_ip,
+          aws_instance.crowdsec_instance_defender.*.public_dns]
+}
+# Get attacker information output
+output "crowdsec_workshop_attacker" {
+  description = "CrowdSec workshop attacker"
+  value = [aws_instance.crowdsec_instance_attack.*.public_ip,
+          aws_instance.crowdsec_instance_attack.*.public_dns]
+}
+# Get defender information output
+output "crowdsec_workshop_defender" {
+  description = "CrowdSec workshop defender"
+  value = [aws_instance.crowdsec_instance_defender.*.public_ip,
+          aws_instance.crowdsec_instance_defender.*.public_dns]
 }
 
-# Tutorial Videos Wordpress Instance
+# Tutorial videos wordpress instance
 # <Not yet defined>
 
-# Tutorial Videos SSHBF Instance
+# Tutorial videos SSHBF instance
 # <Not yet defined>
 
-# Tutorial Videos CrowdSec Latest Instance
+# Tutorial videos CrowdSec latest instance
 # <Not yet defined>
 
-# Tutorial Videos CrowdSec Blank Instance
+# Tutorial videos CrowdSec blank instance
 # <Not yet defined>
 
-# Tutorial Videos Blank Instance
+# Tutorial videos blank instance
 # <Not yet defined>
 
-# Tutorial Videos Attack Instance
+# Tutorial videos attack instance
 # <Not yet defined>
 
-# NPM VPS Instance
+# NPM VPS instance
 # <Not yet defined>
