@@ -11,9 +11,15 @@ variable "secret_key" {
         sensitive = true
         type = string
 }
+# AWS Region Key variable definition
+variable "aws_region" {
+        description = "The AWS region to deploy the EC2 instance in."
+        sensitive = true
+        type = string
+}
 # Name variable definition
 variable "key_name" {
-        description = "Key name to AWS console"
+        description = "Key name to use for AWS instances"
         sensitive = true
         type = string
 }
@@ -26,12 +32,6 @@ variable "ami_attack" {
 # AMI ID variable defense definition
 variable "ami_defense" {
         description = "The AMI to use for Defense"
-        sensitive = true
-        type = string
-}
-# AWS Region Key variable definition
-variable "aws_region" {
-        description = "The AWS region to deploy the EC2 instance in."
         sensitive = true
         type = string
 }
