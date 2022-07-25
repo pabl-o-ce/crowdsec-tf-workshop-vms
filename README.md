@@ -1,14 +1,14 @@
 ![CrowdSec](https://app.crowdsec.net/vectors/crowdsec.svg "CrowdSec Logo") 
 # Crowdsec Terraform for workshops
 ## Variables for AWS
-- **aws_region:** (need to set region, add this to terraform.tfvars below)
-- **access_key:** (add this to terraform.tfvars below)
-- **secret_key:** (add this to terraform.tfvars below)
-- **ami_id:** (add this to terraform.tfvars below)
-- **instance_type:** t2.nano, t2.micro (add this to terraform.tfvars below)
-- **key_name:** (add this to terraform.tfvars below)
-- **security_group_ids:** (add this to terraform.tfvars below)
-- **number_of_instances:** (# of instances of workshop change in variables.tf)
+- **aws_region:** set in [terraform.tfvars] file
+- **access_key:** set in [terraform.tfvars] file
+- **secret_key:** set in [terraform.tfvars] file
+- **ami_id:** set in [terraform.tfvars] file
+- **instance_type:** set in [terraform.tfvars] file
+- **key_name:** set in [terraform.tfvars] file
+- **security_group_ids:** set in [terraform.tfvars] file
+- **number_of_instances:** set in [variables.tf] file
 - **user_data:** https://github.com/klausagnoletti/cloud-init
 
 ## Variables for Digital Ocean
