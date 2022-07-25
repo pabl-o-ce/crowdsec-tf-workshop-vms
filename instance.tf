@@ -40,13 +40,13 @@ resource "aws_instance" "crowdsec_instance_defender" {
       OS                      = var.ami_defense
   }
 }
-# Security group already define in AWS attack instances
+# Security group already defined in AWS attack instances
 resource "aws_network_interface_sg_attachment" "sg_attachment_attack" {
   count                       = var.number_of_instances
   security_group_id           = var.security_group_ids
   network_interface_id        = aws_instance.crowdsec_instance_attack[count.index].primary_network_interface_id
 }
-# Security group already define in AWS defender instances
+# Security group already defined in AWS defender instances
 resource "aws_network_interface_sg_attachment" "sg_attachment_defense" {
   count                       = var.number_of_instances
   security_group_id           = var.security_group_ids
