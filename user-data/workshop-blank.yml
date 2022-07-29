@@ -34,6 +34,7 @@ users:
 
 #edit sshd_config and restart sshd (we need to enable PasswordAuthentication to be able to perform brute-force attack on ssh)
 runcmd:
+  - echo 'LANG=en_US.UTF-8 LC_ALL=en_US.UTF-8' >> /etc/environment #takes care of annoying locales error message in Debian
   - sed -i -e '/^PermitRootLogin/s/^.*$/PermitRootLogin no/' /etc/ssh/sshd_config #Make sure ssh root login is disabled
   - sed -i -e '/^PasswordAuthentication/s/^.*$/PasswordAuthentication yes/' /etc/ssh/sshd_config #we want ssh to accept passwd so we can bruteforce it for testing crowdsec
   - sed -i -e '/^PermitEmptyPasswords/s/^.*$/PermitEmptyPasswords no/' /etc/ssh/sshd_config #wants to make sure that login with empty passwords is not possiible
