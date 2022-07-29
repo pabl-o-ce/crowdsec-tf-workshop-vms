@@ -70,11 +70,13 @@ output "crowdsec_workshop_info" {
 output "crowdsec_workshop_attacker" {
   description                 = "CrowdSec workshop attacker"
   value                       = aws_instance.crowdsec_instance_attack.*
+  sensitive                   = true
 }
 # Get defender information output
 output "crowdsec_workshop_defender" {
   description                 = "CrowdSec workshop defender"
   value                       = aws_instance.crowdsec_instance_defender.*
+  sensitive                   = true
 }
 
 # Tutorial videos wordpress instance
