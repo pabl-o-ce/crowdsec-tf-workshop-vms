@@ -9,5 +9,5 @@ provider "aws" {
 # Cloudflare provider
 provider "cloudflare" {
   # Add Cloudflare token
-  api_token = var.cf_tkn
+  api_token = var.cf_token
 }
