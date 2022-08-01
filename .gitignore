@@ -35,3 +35,5 @@ terraform.tfvars
 .env
 *.pem
 .DS_Store
+*.csv
+*.json
