@@ -1,4 +1,4 @@
-####------ AWS variables
+######## AWS variables
 # Access key variable definition
 variable "access_key" {
         description = "Access key to AWS console"
@@ -52,4 +52,15 @@ variable "number_of_instances" {
         description = "number of instances to be created"
         default = 1
         type = number
+}
+######## Cloudflare variables
+variable "cf_zone_id" {
+        description = "Cloudflare cf_zone_id for dns records"
+        type = string
+        sensitive = true
+}
+variable "cf_tkn" {
+        description = "Cloudflare token for dns domain"
+        type = string
+        sensitive = true
 }
