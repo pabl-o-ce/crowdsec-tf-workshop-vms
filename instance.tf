@@ -1,5 +1,5 @@
 # Workshop attacker instance
-resource "aws_instance" "crowdsec_instance_attack" {
+resource "aws_instance" "crowdsec_instance_attacker" {
   # Add number of instances
   count                       = var.number_of_instances
   # Add image type
@@ -40,14 +40,14 @@ resource "aws_instance" "crowdsec_instance_defender" {
       OS                      = var.ami_defense
   }
 }
-# Security group already defined for AWS attack instances
-resource "aws_network_interface_sg_attachment" "sg_attachment_attack" {
+# Security group already defined for AWS attacker instances
+resource "aws_network_interface_sg_attachment" "sg_attachment_attacker" {
   # Add number of instances
   count                       = var.number_of_instances
   # Add security group id
   security_group_id           = var.security_group_ids
   # Add network interface id attachment to instances
-  network_interface_id        = aws_instance.crowdsec_instance_attack[count.index].primary_network_interface_id
+  network_interface_id        = aws_instance.crowdsec_instance_attacker[count.index].primary_network_interface_id
 }
 # Security group already defined for AWS defender instances
 resource "aws_network_interface_sg_attachment" "sg_attachment_defense" {
@@ -59,24 +59,27 @@ resource "aws_network_interface_sg_attachment" "sg_attachment_defense" {
   network_interface_id        = aws_instance.crowdsec_instance_defender[count.index].primary_network_interface_id
 }
 # Get all instances output
-output "crowdsec_workshop_info" {
+output "crowdsec_workshop_info_a" {
   description                 = "CrowdSec workshop info"
-  value                       = [aws_instance.crowdsec_instance_attack.*.public_ip,
-                                aws_instance.crowdsec_instance_attack.*.public_dns,
-                                aws_instance.crowdsec_instance_defender.*.public_ip,
-                                aws_instance.crowdsec_instance_defender.*.public_dns]
+  value                       = flatten([
+                                  [
+                                    for key, value in aws_instance.crowdsec_instance_attacker : { name: value.tags.Name, public_ip: value.public_ip, public_dns: value.public_dns}
+                                  ],
+                                  [
+                                    for key, value in aws_instance.crowdsec_instance_defender : { name: value.tags.Name, public_ip: value.public_ip, public_dns: value.public_dns}
+                                  ]
+                                ])
 }
-# Get attacker information output
-output "crowdsec_workshop_attacker" {
-  description                 = "CrowdSec workshop attacker"
-  value                       = aws_instance.crowdsec_instance_attack.*
-  sensitive                   = true
-}
-# Get defender information output
-output "crowdsec_workshop_defender" {
-  description                 = "CrowdSec workshop defender"
-  value                       = aws_instance.crowdsec_instance_defender.*
-  sensitive                   = true
+output "crowdsec_workshop_info_aws" {
+  description                 = "CrowdSec workshop info"
+  value                       = {
+                                  attackers: [
+                                    for key, value in aws_instance.crowdsec_instance_attacker : { name: value.tags.Name, public_ip: value.public_ip, public_dns: value.public_dns}
+                                  ],
+                                  defenders: [
+                                    for key, value in aws_instance.crowdsec_instance_defender : { name: value.tags.Name, public_ip: value.public_ip, public_dns: value.public_dns}
+                                  ]
+                                }
 }
 
 # Tutorial videos wordpress instance
