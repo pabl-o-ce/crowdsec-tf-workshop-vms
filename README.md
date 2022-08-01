@@ -66,3 +66,12 @@ If you no longer require resources you created using the configuration mentioned
 ```sh
 terraform destroy --auto-approve
 ```
+#### Output to CSV file
+Using `jq`
+```
+terraform output -json crowdsec_workshop_info_cloudflare_list | jq -r '(map(keys) | add | unique) as $cols | map(. as $row | $cols | map($row[.])) as $rows | $cols, $rows[] | @csv' > output.csv
+```
+Using `jsonv`
+```
+terraform output -json crowdsec_workshop_info_cloudflare_list | jsonv dns,public_ip > output.csv
+```
