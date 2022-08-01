@@ -28,14 +28,18 @@ touch ./terraform.tfvars
 ```
 Add variable for AWS:
 ```sh
-echo -e "access_key = \"<accessKey>\"
+echo -e "# AWS
+access_key = \"<accessKey>\"
 secret_key = \"<secretKey>\"
 aws_region = \"<region>\"
 key_name = \"<keyName>\"
 ami_attack = \"<amiId>\"
 ami_defense = \"<amiId>\"
 instance_type = \"<instanceType>\"
-security_group_ids = \"<securityGroupIds>\"" > ./terraform.tfvars
+security_group_ids = \"<securityGroupIds>\"
+# Cloudflare
+cf_zone_id = \"<cf_zone_id>\"
+cf_token = \"<cf_token>\"" > ./terraform.tfvars
 ```
 ### Create an EC2 Instance using the Terraform configuration files
 #### The first command to be used is 'terraform init'.
