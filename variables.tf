@@ -59,7 +59,7 @@ variable "cf_zone_id" {
         type = string
         sensitive = true
 }
-variable "cf_tkn" {
+variable "cf_token" {
         description = "Cloudflare token for dns domain"
         type = string
         sensitive = true

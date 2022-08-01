@@ -11,6 +11,9 @@
 - **number_of_instances:** set in [__***variables.tf***__] file
 - **user_data:** https://github.com/klausagnoletti/cloud-init
 
+## Variables for Cloudflare
+- **cf_zone_id:** set in [__***terraform.tfvars***__] file
+- **cf_token:** set in [__***terraform.tfvars***__] file
 ## Variables for Digital Ocean
 - **key:**
 ## Variables for Oracle Cloud
