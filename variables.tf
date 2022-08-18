@@ -1,4 +1,18 @@
-######## AWS variables
+#####     Cloud Provider     #####
+
+variable "cloud_provider" {
+        description = "Select cloud provider:  aws | tsp [transip]"
+        sensitive = true
+        type = string
+}
+variable "dns_provider" {
+        description = "Select cloud provider:  cf [cloudflare] | tsp [transip]"
+        sensitive = true
+        type = string
+}
+
+#####     AWS     #####
+
 # Access key variable definition
 variable "access_key" {
         description = "Access key to AWS console"
@@ -48,19 +62,68 @@ variable "security_group_ids" {
         type = string
 }
 # Number of instances variable definition
-variable "number_of_instances" {
+variable "aws_number_of_instances" {
         description = "number of instances to be created"
-        default = 1
         type = number
+        sensitive = true
 }
-######## Cloudflare variables
+
+#####     Cloudflare     #####
+
+# Cloudflare zone ID domain
 variable "cf_zone_id" {
         description = "Cloudflare cf_zone_id for dns records"
         type = string
         sensitive = true
 }
+# Cloudflare token zone id
 variable "cf_token" {
         description = "Cloudflare token for dns domain"
+        type = string
+        sensitive = true
+}
+
+#####     TransIP     #####
+
+# TransIP number of instances
+variable "tsp_number_of_instances" {
+        description = "number of instances to be created"
+        type = number
+        sensitive = true
+}
+# TransIP account
+variable "tsp_account" {
+        description = "TransIP auth account"
+        type = string
+        sensitive = true
+}
+# TransIP availability zone
+variable "tsp_azone" {
+        description = "TransIP availability zone"
+        type = string
+        sensitive = true
+}
+# TransIP type of vm instances
+variable "tsp_type" {
+        description = "TransIP type of vm instance"
+        type = string
+        sensitive = true
+}
+# TransIP attacker OS
+variable "tsp_image_attacker" {
+        description = "The AMI to use for attacker"
+        type = string
+        sensitive = true
+}
+# TransIP defender OS
+variable "tsp_image_defender" {
+        description = "The AMI to use for defender"
+        type = string
+        sensitive = true
+}
+# TransIP defender OS
+variable "tsp_domain" {
+        description = "Transip Domain"
         type = string
         sensitive = true
 }
