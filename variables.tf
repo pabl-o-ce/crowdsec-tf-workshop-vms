@@ -1,16 +1,16 @@
 #####     Cloud Provider     #####
 
-variable "cloud_provider" {
+variable "mio_cloud_provider" {
         description = "Select cloud provider:  aws | tsp [transip]"
         sensitive = true
         type = string
 }
-variable "dns_provider" {
+variable "mio_dns_provider" {
         description = "Select cloud provider:  cf [cloudflare] | tsp [transip]"
         sensitive = true
         type = string
 }
-variable "user_data_path" {
+variable "mio_user_data_path" {
         description = "Select path to user-data folder"
         sensitive = true
         type = string

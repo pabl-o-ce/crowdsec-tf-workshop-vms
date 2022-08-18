@@ -1,7 +1,7 @@
 # Workshop attacker instance
 resource "transip_vps" "crowdsec_instance_attacker" {
   # Add number of instances
-  count                         = (var.cloud_provider == "tsp") ? var.tsp_number_of_instances : 0
+  count                         = (var.mio_cloud_provider == "tsp") ? var.tsp_number_of_instances : 0
   # Availability zone
   availability_zone             = var.tsp_azone
   # Add instances type
@@ -9,7 +9,7 @@ resource "transip_vps" "crowdsec_instance_attacker" {
   # Add image type
   operating_system              = var.tsp_image_attacker
   # Add cloud-init on user-data folder
-  install_text                  = file("${var.user_data_path}/workshop-attack.yml")
+  install_text                  = file("${var.mio_user_data_path}/workshop-attack.yml")
   # Add description name
   description                   = (count.index<9) ? "attacker0${(count.index+1)}" : "attacker${(count.index+1)}"
   # Add tags [not working]
@@ -21,7 +21,7 @@ resource "transip_vps" "crowdsec_instance_attacker" {
 # Workshop defender instance
 resource "transip_vps" "crowdsec_instance_defender" {
   # Add number of instances
-  count                         = (var.cloud_provider == "tsp") ? var.tsp_number_of_instances : 0
+  count                         = (var.mio_cloud_provider == "tsp") ? var.tsp_number_of_instances : 0
   # Availability zone
   availability_zone             = var.tsp_azone
   # Add instances type
@@ -29,7 +29,7 @@ resource "transip_vps" "crowdsec_instance_defender" {
   # Add image type
   operating_system              = var.tsp_image_defender
   # Add cloud-init on user-data folder
-  install_text                  = file("${var.user_data_path}/workshop-blank.yml")
+  install_text                  = file("${var.mio_user_data_path}/workshop-blank.yml")
   # Add description name
   description                   = (count.index<9) ? "defender0${(count.index+1)}" : "defender${(count.index+1)}"
   # Add tags [not working]
@@ -86,7 +86,7 @@ data "transip_domain" "crowdsec_domain" {
 }
 # DNS attacker records
 resource "transip_dns_record" "crowdsec_records_attacker" {
-  for_each                      = (var.cloud_provider == "tsp" && var.dns_provider == "tsp") ? zipmap( transip_vps.crowdsec_instance_attacker[*].description, transip_vps.crowdsec_instance_attacker[*].ip_address ) : (var.cloud_provider == "aws" && var.dns_provider == "tsp") ? zipmap( aws_instance.crowdsec_instance_attacker[*].tags.Name, aws_instance.crowdsec_instance_attacker[*].public_ip ) : {}
+  for_each                      = (var.mio_cloud_provider == "tsp" && var.mio_dns_provider == "tsp") ? zipmap( transip_vps.crowdsec_instance_attacker[*].description, transip_vps.crowdsec_instance_attacker[*].ip_address ) : (var.mio_cloud_provider == "aws" && var.mio_dns_provider == "tsp") ? zipmap( aws_instance.crowdsec_instance_attacker[*].tags.Name, aws_instance.crowdsec_instance_attacker[*].public_ip ) : {}
   name                          = each.key
   content                       = ["${each.value}"]
   domain                        = data.transip_domain.crowdsec_domain.id
@@ -94,7 +94,7 @@ resource "transip_dns_record" "crowdsec_records_attacker" {
 }
 # DNS defender records
 resource "transip_dns_record" "crowdsec_records_defender" {
-  for_each                      = (var.cloud_provider == "tsp" && var.dns_provider == "tsp") ? zipmap( transip_vps.crowdsec_instance_defender[*].description, transip_vps.crowdsec_instance_defender[*].ip_address ) : (var.cloud_provider == "aws" && var.dns_provider == "tsp") ?  zipmap( aws_instance.crowdsec_instance_defender[*].tags.Name, aws_instance.crowdsec_instance_defender[*].public_ip ) : {}
+  for_each                      = (var.mio_cloud_provider == "tsp" && var.mio_dns_provider == "tsp") ? zipmap( transip_vps.crowdsec_instance_defender[*].description, transip_vps.crowdsec_instance_defender[*].ip_address ) : (var.mio_cloud_provider == "aws" && var.mio_dns_provider == "tsp") ?  zipmap( aws_instance.crowdsec_instance_defender[*].tags.Name, aws_instance.crowdsec_instance_defender[*].public_ip ) : {}
   name                          = each.key
   content                       = ["${each.value}"]
   domain                        = data.transip_domain.crowdsec_domain.id

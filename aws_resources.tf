@@ -1,7 +1,7 @@
 # Workshop attacker instance
 resource "aws_instance" "crowdsec_instance_attacker" {
   # Add number of instances
-  count                       = (var.cloud_provider == "aws") ? var.aws_number_of_instances : 0
+  count                       = (var.mio_cloud_provider == "aws") ? var.aws_number_of_instances : 0
   # Add image type
   ami                         = var.aws_ami_attack
   # Add instances type
@@ -11,7 +11,7 @@ resource "aws_instance" "crowdsec_instance_attacker" {
   # Add public ip
   associate_public_ip_address = true
   # Add cloud-init on user-data folder
-  user_data                   = file("${var.user_data_path}/workshop-attack.yml")
+  user_data                   = file("${var.mio_user_data_path}/workshop-attack.yml")
   # Add tags
   tags = {
       Name                    = (count.index<9) ? "attacker0${(count.index+1)}" : "attacker${(count.index+1)}"
@@ -22,7 +22,7 @@ resource "aws_instance" "crowdsec_instance_attacker" {
 # Workshop defender instance
 resource "aws_instance" "crowdsec_instance_defender" {
   # Add number of instances
-  count                       = (var.cloud_provider == "aws") ? var.aws_number_of_instances : 0
+  count                       = (var.mio_cloud_provider == "aws") ? var.aws_number_of_instances : 0
   # Add image type
   ami                         = var.aws_ami_defense
   # Add instance type
@@ -32,7 +32,7 @@ resource "aws_instance" "crowdsec_instance_defender" {
   # Add public ip
   associate_public_ip_address = true
   # Add cloud-init on user-data folder
-  user_data                   = file("${var.user_data_path}/user-data/workshop-blank.yml")
+  user_data                   = file("${var.mio_user_data_path}/user-data/workshop-blank.yml")
   # Add tags
   tags = {
       Name                    = (count.index<9) ? "defender0${(count.index+1)}" : "defender${(count.index+1)}"
@@ -43,7 +43,7 @@ resource "aws_instance" "crowdsec_instance_defender" {
 # Security group already defined for AWS attacker instances
 resource "aws_network_interface_sg_attachment" "sg_attachment_attacker" {
   # Add number of instances
-  count                       = (var.cloud_provider == "aws") ? var.aws_number_of_instances : 0
+  count                       = (var.mio_cloud_provider == "aws") ? var.aws_number_of_instances : 0
   # Add security group id
   security_group_id           = var.aws_security_group_ids
   # Add network interface id attachment to instances
@@ -52,7 +52,7 @@ resource "aws_network_interface_sg_attachment" "sg_attachment_attacker" {
 # Security group already defined for AWS defender instances
 resource "aws_network_interface_sg_attachment" "sg_attachment_defense" {
   # Add number of instances
-  count                       = (var.cloud_provider == "aws") ? var.aws_number_of_instances : 0
+  count                       = (var.mio_cloud_provider == "aws") ? var.aws_number_of_instances : 0
   # Add security group id
   security_group_id           = var.aws_security_group_ids
   # Add network interface id attachment to instances
