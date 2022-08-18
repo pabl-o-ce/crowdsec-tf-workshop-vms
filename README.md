@@ -34,6 +34,7 @@ Add variables:
 echo -e "#####     Cloud Provider     #####
 cloud_provider = \"<aws || tsp>\"
 dns_provider = \"<cf || tsp>\"
+user_data_path = \"./user-data\"
 #####     AWS     #####
 aws_number_of_instances = \"<aws_number_instances>\"
 aws_access_key = \"<accessKey>\"

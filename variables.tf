@@ -10,6 +10,11 @@ variable "dns_provider" {
         sensitive = true
         type = string
 }
+variable "user_data_path" {
+        description = "Select path to user-data folder"
+        sensitive = true
+        type = string
+}
 
 #####     AWS     #####
 

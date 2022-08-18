@@ -9,7 +9,7 @@ resource "transip_vps" "crowdsec_instance_attacker" {
   # Add image type
   operating_system              = var.tsp_image_attacker
   # Add cloud-init on user-data folder
-  install_text                  = file("${path.module}/user-data/workshop-attack.yml")
+  install_text                  = file("${var.user_data_path}/workshop-attack.yml")
   # Add description name
   description                   = (count.index<9) ? "attacker0${(count.index+1)}" : "attacker${(count.index+1)}"
   # Add tags [not working]
@@ -29,7 +29,7 @@ resource "transip_vps" "crowdsec_instance_defender" {
   # Add image type
   operating_system              = var.tsp_image_defender
   # Add cloud-init on user-data folder
-  install_text                  = file("${path.module}/user-data/workshop-blank.yml")
+  install_text                  = file("${var.user_data_path}/workshop-blank.yml")
   # Add description name
   description                   = (count.index<9) ? "defender0${(count.index+1)}" : "defender${(count.index+1)}"
   # Add tags [not working]

@@ -11,7 +11,7 @@ resource "aws_instance" "crowdsec_instance_attacker" {
   # Add public ip
   associate_public_ip_address = true
   # Add cloud-init on user-data folder
-  user_data                   = file("${path.module}/user-data/workshop-attack.yml")
+  user_data                   = file("${var.user_data_path}/workshop-attack.yml")
   # Add tags
   tags = {
       Name                    = (count.index<9) ? "attacker0${(count.index+1)}" : "attacker${(count.index+1)}"
@@ -32,7 +32,7 @@ resource "aws_instance" "crowdsec_instance_defender" {
   # Add public ip
   associate_public_ip_address = true
   # Add cloud-init on user-data folder
-  user_data                   = file("${path.module}/user-data/workshop-blank.yml")
+  user_data                   = file("${var.user_data_path}/user-data/workshop-blank.yml")
   # Add tags
   tags = {
       Name                    = (count.index<9) ? "defender0${(count.index+1)}" : "defender${(count.index+1)}"
