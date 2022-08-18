@@ -13,5 +13,5 @@ output "crowdsec_workshop" {
                                       for dkey, dvalue in transip_vps.crowdsec_instance_defender : { attacker_dns: "${value.description}.${data.transip_domain.crowdsec_domain.id}", attacker_public_ip: value.ip_address, defender_dns: "${dvalue.description}.${data.transip_domain.crowdsec_domain.id}", defender_public_ip: dvalue.ip_address } 
                                     ]
                                   ],
-                                ]) : ""
+                                ]) : []
 }
