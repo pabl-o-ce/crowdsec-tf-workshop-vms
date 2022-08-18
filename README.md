@@ -13,12 +13,6 @@
 ## Cloudflare
 - **cf_zone_id:** set in [__***terraform.tfvars***__] file
 - **cf_token:** set in [__***terraform.tfvars***__] file
-## Digital Ocean
-- **key:**
-## Oracle Cloud
-- **key:**
-## Linode
-- **key:**
 ## TransIP
 - **tsp_account:** set in [__***terraform.tfvars***__] file
 - **tsp_key:** set in [__***terraform.tfvars***__] file
@@ -42,14 +36,14 @@ cloud_provider = \"<aws || tsp>\"
 dns_provider = \"<cf || tsp>\"
 #####     AWS     #####
 aws_number_of_instances = \"<aws_number_instances>\"
-access_key = \"<accessKey>\"
-secret_key = \"<secretKey>\"
+aws_access_key = \"<accessKey>\"
+aws_secret_key = \"<secretKey>\"
 aws_region = \"<region>\"
-key_name = \"<keyName>\"
-ami_attack = \"<amiId>\"
-ami_defense = \"<amiId>\"
-instance_type = \"<instanceType>\"
-security_group_ids = \"<securityGroupIds>\"
+aws_key_name = \"<keyName>\"
+aws_ami_attack = \"<amiId>\"
+aws_ami_defense = \"<amiId>\"
+aws_instance_type = \"<instanceType>\"
+aws_security_group_ids = \"<securityGroupIds>\"
 #####     Cloudflare     #####
 cf_zone_id = \"<cf_zone_id>\"
 cf_token = \"<cf_token>\"
