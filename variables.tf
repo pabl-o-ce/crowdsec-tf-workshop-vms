@@ -14,13 +14,13 @@ variable "dns_provider" {
 #####     AWS     #####
 
 # Access key variable definition
-variable "access_key" {
+variable "aws_access_key" {
         description = "Access key to AWS console"
         sensitive = true
         type = string
 }
 # Secret key variable definition
-variable "secret_key" {
+variable "aws_secret_key" {
         description = "Secret key to AWS console"
         sensitive = true
         type = string
@@ -32,31 +32,31 @@ variable "aws_region" {
         type = string
 }
 # Name variable definition
-variable "key_name" {
+variable "aws_key_name" {
         description = "Key name to use for AWS instances"
         sensitive = true
         type = string
 }
 # AMI ID variable attacker definition
-variable "ami_attack" {
+variable "aws_ami_attack" {
         description = "The AMI to use for Attack"
         sensitive = true
         type = string
 }
 # AMI ID variable defense definition
-variable "ami_defense" {
+variable "aws_ami_defense" {
         description = "The AMI to use for Defense"
         sensitive = true
         type = string
 }
 # AWS Instance type variable definition
-variable "instance_type" {
+variable "aws_instance_type" {
         description = "AWS Instance type for EC2"
         sensitive = true
         type = string
 }
 # Security-group-ids variable definition
-variable "security_group_ids" {
+variable "aws_security_group_ids" {
         description = "The VPC subnet the instance(s) will be created in"
         sensitive = true
         type = string
