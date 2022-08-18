@@ -6,12 +6,12 @@
 - **user_data_path** set in [__***terraform.tfvars***__] file
 ## AWS
 - **aws_region:** set in [__***terraform.tfvars***__] file
-- **access_key:** set in [__***terraform.tfvars***__] file
-- **secret_key:** set in [__***terraform.tfvars***__] file
-- **ami_id:** set in [__***terraform.tfvars***__] file
-- **instance_type:** set in [__***terraform.tfvars***__] file
-- **key_name:** set in [__***terraform.tfvars***__] file
-- **security_group_ids:** set in [__***terraform.tfvars***__] file
+- **aws_access_key:** set in [__***terraform.tfvars***__] file
+- **aws_secret_key:** set in [__***terraform.tfvars***__] file
+- **aws_ami_id:** set in [__***terraform.tfvars***__] file
+- **aws_instance_type:** set in [__***terraform.tfvars***__] file
+- **aws_key_name:** set in [__***terraform.tfvars***__] file
+- **aws_security_group_ids:** set in [__***terraform.tfvars***__] file
 - **aws_number_of_instances:** set in [__***variables.tf***__] file
 - **user_data:** https://github.com/klausagnoletti/cloud-init
 ## Cloudflare
