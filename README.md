@@ -1,5 +1,9 @@
 ![CrowdSec](https://app.crowdsec.net/vectors/crowdsec.svg "CrowdSec Logo") 
 # Crowdsec Terraform for workshops
+## Cloud provider
+- **cloud_provider** set in [__***terraform.tfvars***__] file
+- **dns_provider** set in [__***terraform.tfvars***__] file
+- **user_data_path** set in [__***terraform.tfvars***__] file
 ## AWS
 - **aws_region:** set in [__***terraform.tfvars***__] file
 - **access_key:** set in [__***terraform.tfvars***__] file
