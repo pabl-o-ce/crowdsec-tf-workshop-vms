@@ -81,9 +81,9 @@ terraform destroy --auto-approve
 #### Output to CSV file
 Using `jq`
 ```
-terraform output -json crowdsec_workshop_list | jq -r '(map(keys) | add | unique) as $cols | map(. as $row | $cols | map($row[.])) as $rows | $cols, $rows[] | @csv' > output.csv
+terraform output -json crowdsec_workshop | jq -r '(map(keys) | add | unique) as $cols | map(. as $row | $cols | map($row[.])) as $rows | $cols, $rows[] | @csv' > output.csv
 ```
 Using `jsonv`
 ```
-terraform output -json crowdsec_workshop_list | jsonv dns,public_ip > output.csv
+terraform output -json crowdsec_workshop | jsonv dns,public_ip > output.csv
 ```
