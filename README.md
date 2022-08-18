@@ -1,6 +1,6 @@
 ![CrowdSec](https://app.crowdsec.net/vectors/crowdsec.svg "CrowdSec Logo") 
 # Crowdsec Terraform for workshops
-## Variables for AWS
+## AWS
 - **aws_region:** set in [__***terraform.tfvars***__] file
 - **access_key:** set in [__***terraform.tfvars***__] file
 - **secret_key:** set in [__***terraform.tfvars***__] file
@@ -8,30 +8,40 @@
 - **instance_type:** set in [__***terraform.tfvars***__] file
 - **key_name:** set in [__***terraform.tfvars***__] file
 - **security_group_ids:** set in [__***terraform.tfvars***__] file
-- **number_of_instances:** set in [__***variables.tf***__] file
+- **aws_number_of_instances:** set in [__***variables.tf***__] file
 - **user_data:** https://github.com/klausagnoletti/cloud-init
-
-## Variables for Cloudflare
+## Cloudflare
 - **cf_zone_id:** set in [__***terraform.tfvars***__] file
 - **cf_token:** set in [__***terraform.tfvars***__] file
-## Variables for Digital Ocean
+## Digital Ocean
 - **key:**
-## Variables for Oracle Cloud
+## Oracle Cloud
 - **key:**
-## Variables for Linode
+## Linode
 - **key:**
-## Variables for TransIP
-- **key:**
+## TransIP
+- **tsp_account:** set in [__***terraform.tfvars***__] file
+- **tsp_key:** set in [__***terraform.tfvars***__] file
+- **tsp_type:** set in [__***terraform.tfvars***__] file
+- **tsp_image_attacker:** set in [__***terraform.tfvars***__] file
+- **tsp_image_defender:** set in [__***terraform.tfvars***__] file
+- **tsp_azone:** = set in [__***terraform.tfvars***__] file
+- **tsp_number_of_instances:** set in [__***variables.tf***__] file
+- **install_text:** https://github.com/klausagnoletti/cloud-init
 
 ## Setup
-### Get AWS Credentials Access key and Secret Key
+### Get Credentials Access from the cloud provider you want to use
 Once you get the keys you need to create and define terraform.tfvars:
 ```
 touch ./terraform.tfvars
 ```
-Add variable for AWS:
+Add variables:
 ```sh
-echo -e "# AWS
+echo -e "#####     Cloud Provider     #####
+cloud_provider = \"<aws || tsp>\"
+dns_provider = \"<cf || tsp>\"
+#####     AWS     #####
+aws_number_of_instances = \"<aws_number_instances>\"
 access_key = \"<accessKey>\"
 secret_key = \"<secretKey>\"
 aws_region = \"<region>\"
@@ -40,38 +50,41 @@ ami_attack = \"<amiId>\"
 ami_defense = \"<amiId>\"
 instance_type = \"<instanceType>\"
 security_group_ids = \"<securityGroupIds>\"
-# Cloudflare
+#####     Cloudflare     #####
 cf_zone_id = \"<cf_zone_id>\"
-cf_token = \"<cf_token>\"" > ./terraform.tfvars
+cf_token = \"<cf_token>\"
+#####     TransIP     #####
+tsp_number_of_instances = \"<tsp_number_instances>\"
+tsp_account = \"<tsp_account>\"
+tsp_key = \"<tsp_key>\"
+tsp_type = \"<tsp_instance_type>\"
+tsp_image_attacker = \"<tsp_attacker_image>\"
+tsp_image_defender = \"<tsp_defender_image>\"
+tsp_azone = \"<tsp_available_zone>\"" > ./terraform.tfvars
 ```
-### Create an EC2 Instance using the Terraform configuration files
-#### The first command to be used is 'terraform init'.
-This command downloads and installs plugins for providers used within the configuration. In our case it is AWS.
+### Terraform configuration files
+#### Init Terraform
 ```sh
 terraform init
 ```
-#### The second command to be used is 'terraform plan'.
-This command is used to see the changes that will take place on the infrastructure.
+#### Check Terraform
 ```sh
 terraform plan --auto-approve
 ```
-#### The third command to be used is 'terraform apply'
-this command will create the resources on the AWS mentioned in the main.tf file.
-You will be prompted to provide your input to create the resources.
+#### Create Terraform
 ```sh
 terraform apply -var-file="terraform.tfvars" --auto-approve
 ```
-#### Delete the created EC2 Instance using Terraform
-If you no longer require resources you created using the configuration mentioned in the main.tf file, You can use the "terraform destroy" command to delete all those resources.
+#### Delete using Terraform
 ```sh
 terraform destroy --auto-approve
 ```
 #### Output to CSV file
 Using `jq`
 ```
-terraform output -json crowdsec_workshop_info_cloudflare_list | jq -r '(map(keys) | add | unique) as $cols | map(. as $row | $cols | map($row[.])) as $rows | $cols, $rows[] | @csv' > output.csv
+terraform output -json crowdsec_workshop_list | jq -r '(map(keys) | add | unique) as $cols | map(. as $row | $cols | map($row[.])) as $rows | $cols, $rows[] | @csv' > output.csv
 ```
 Using `jsonv`
 ```
-terraform output -json crowdsec_workshop_info_cloudflare_list | jsonv dns,public_ip > output.csv
+terraform output -json crowdsec_workshop_list | jsonv dns,public_ip > output.csv
 ```
