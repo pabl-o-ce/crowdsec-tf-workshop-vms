@@ -65,12 +65,12 @@ resource "transip_vps_firewall" "crowdsec_firewall_defender" {
     protocol              = "tcp"
   }
   inbound_rule {
-    description           = "Defender#0"
+    description           = "HTTP#1"
     port                  = "3000"
     protocol              = "tcp"
   }
   inbound_rule {
-    description           = "Defender#1"
+    description           = "HTTP#2"
     port                  = "4000"
     protocol              = "tcp"
   }
