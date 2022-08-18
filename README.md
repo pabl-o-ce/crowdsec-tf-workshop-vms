@@ -12,7 +12,7 @@
 - **aws_instance_type:** set in [__***terraform.tfvars***__] file
 - **aws_key_name:** set in [__***terraform.tfvars***__] file
 - **aws_security_group_ids:** set in [__***terraform.tfvars***__] file
-- **aws_number_of_instances:** set in [__***variables.tf***__] file
+- **aws_number_of_instances:** set in [__***terraform.tfvars***__] file
 - **user_data:** https://github.com/klausagnoletti/cloud-init
 ## Cloudflare
 - **cf_zone_id:** set in [__***terraform.tfvars***__] file
@@ -24,7 +24,7 @@
 - **tsp_image_attacker:** set in [__***terraform.tfvars***__] file
 - **tsp_image_defender:** set in [__***terraform.tfvars***__] file
 - **tsp_azone:** = set in [__***terraform.tfvars***__] file
-- **tsp_number_of_instances:** set in [__***variables.tf***__] file
+- **tsp_number_of_instances:** set in [__***terraform.tfvars***__] file
 - **install_text:** https://github.com/klausagnoletti/cloud-init
 
 ## Setup
