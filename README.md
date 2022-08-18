@@ -56,7 +56,7 @@ tsp_image_attacker = \"<tsp_attacker_image>\"
 tsp_image_defender = \"<tsp_defender_image>\"
 tsp_azone = \"<tsp_available_zone>\"" > ./terraform.tfvars
 ```
-### Terraform configuration files
+### Terraform
 #### Init Terraform
 ```sh
 terraform init
