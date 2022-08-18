@@ -28,7 +28,6 @@
 - **install_text:** https://github.com/klausagnoletti/cloud-init
 
 ## Setup
-### Get Credentials Access from the cloud provider you want to use
 Once you get the keys you need to create and define terraform.tfvars:
 ```
 touch ./terraform.tfvars

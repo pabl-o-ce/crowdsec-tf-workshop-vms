@@ -1,6 +1,6 @@
 # Cloudflare/TransIP output data
 output "crowdsec_workshop" {
-  description                 = "CrowdSec workshop - Cloudflare"
+  description                 = "CrowdSec workshop - Cloudflare/TransIP"
   value                       = (var.mio_dns_provider == "cf") ? flatten([
                                   [
                                     for key, value in cloudflare_record.attacker_records : [
