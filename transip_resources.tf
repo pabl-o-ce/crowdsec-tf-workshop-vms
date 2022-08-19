@@ -50,36 +50,36 @@ resource "transip_vps" "crowdsec_instance_defender" {
 #   }
 # }
 # Firewall defender
-# resource "transip_vps_firewall" "crowdsec_firewall_defender" {
-#   for_each                      = zipmap( transip_vps.crowdsec_instance_defender[*].description, transip_vps.crowdsec_instance_defender[*].name )
-#   vps_name                      = each.value
-#   is_enabled                    = true
-#   inbound_rule {
-#     description           = "HTTP"
-#     port                  = "80"
-#     protocol              = "tcp"
-#   }
-#   inbound_rule {
-#     description           = "HTTPS"
-#     port                  = "443"
-#     protocol              = "tcp"
-#   }
-#   inbound_rule {
-#     description           = "HTTP#1"
-#     port                  = "3000"
-#     protocol              = "tcp"
-#   }
-#   inbound_rule {
-#     description           = "HTTP#2"
-#     port                  = "4000"
-#     protocol              = "tcp"
-#   }
-#   inbound_rule {
-#     description           = "SSH"
-#     port                  = "22"
-#     protocol              = "tcp"
-#   }
-# }
+resource "transip_vps_firewall" "crowdsec_firewall_defender" {
+  for_each                      = zipmap( transip_vps.crowdsec_instance_defender[*].description, transip_vps.crowdsec_instance_defender[*].name )
+  vps_name                      = each.value
+  is_enabled                    = true
+  inbound_rule {
+    description           = "HTTP"
+    port                  = "80"
+    protocol              = "tcp"
+  }
+  inbound_rule {
+    description           = "HTTPS"
+    port                  = "443"
+    protocol              = "tcp"
+  }
+  inbound_rule {
+    description           = "HTTP#1"
+    port                  = "3000"
+    protocol              = "tcp"
+  }
+  inbound_rule {
+    description           = "HTTP#2"
+    port                  = "4000"
+    protocol              = "tcp"
+  }
+  inbound_rule {
+    description           = "SSH"
+    port                  = "22"
+    protocol              = "tcp"
+  }
+}
 # Domain as data resource instead
 data "transip_domain" "crowdsec_domain" {
   name                          = var.tsp_domain
