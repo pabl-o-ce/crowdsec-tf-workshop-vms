@@ -19,7 +19,6 @@
 - **cf_token:** set in [__***terraform.tfvars***__] file
 ## TransIP
 - **tsp_account:** set in [__***terraform.tfvars***__] file
-- **tsp_key:** set in [__***terraform.tfvars***__] file
 - **tsp_type:** set in [__***terraform.tfvars***__] file
 - **tsp_image_attacker:** set in [__***terraform.tfvars***__] file
 - **tsp_image_defender:** set in [__***terraform.tfvars***__] file
