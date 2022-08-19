@@ -39,16 +39,21 @@ resource "transip_vps" "crowdsec_instance_defender" {
   # }
 }
 # Firewall attacker
-# resource "transip_vps_firewall" "crowdsec_firewall_attacker" {
-#   for_each                      = zipmap( transip_vps.crowdsec_instance_attacker[*].description, transip_vps.crowdsec_instance_attacker[*].name )
-#   vps_name                      = each.value
-#   is_enabled                    = true
-#   inbound_rule {
-#     description           = "SSH"
-#     port                  = "22"
-#     protocol              = "tcp"
-#   }
-# }
+resource "transip_vps_firewall" "crowdsec_firewall_attacker" {
+  for_each                      = zipmap( transip_vps.crowdsec_instance_attacker[*].description, transip_vps.crowdsec_instance_attacker[*].name )
+  vps_name                      = each.value
+  is_enabled                    = true
+  inbound_rule {
+    description           = "SSH"
+    port                  = "22"
+    protocol              = "tcp"
+  }
+    inbound_rule {
+    description           = "HTTP#1"
+    port                  = "8080"
+    protocol              = "tcp"
+  }
+ }
 # Firewall defender
 resource "transip_vps_firewall" "crowdsec_firewall_defender" {
   for_each                      = zipmap( transip_vps.crowdsec_instance_defender[*].description, transip_vps.crowdsec_instance_defender[*].name )
@@ -72,6 +77,11 @@ resource "transip_vps_firewall" "crowdsec_firewall_defender" {
   inbound_rule {
     description           = "HTTP#2"
     port                  = "4000"
+    protocol              = "tcp"
+  }
+   inbound_rule {
+    description           = "HTTP#3"
+    port                  = "5000"
     protocol              = "tcp"
   }
   inbound_rule {
