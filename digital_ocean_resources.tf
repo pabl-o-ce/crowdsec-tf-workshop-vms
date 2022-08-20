@@ -14,9 +14,7 @@ resource "digitalocean_droplet" "crowdsec_instance_attacker" {
   user_data                     = file("${var.mio_user_data_path}/workshop-attack.yml")
   # Add tags
   tags = [
-      (count.index<9) ? "attacker0${(count.index+1)}" : "attacker${(count.index+1)}",
-      "CrowdSec workshop",
-      var.do_image_attacker
+      (count.index<9) ? "attacker0${(count.index+1)}" : "attacker${(count.index+1)}"
   ]
 }
 
@@ -36,9 +34,7 @@ resource "digitalocean_droplet" "crowdsec_instance_defender" {
   user_data                     = file("${var.mio_user_data_path}/workshop-blank.yml")
   # Add tags
   tags = [
-      (count.index<9) ? "defender0${(count.index+1)}" : "defender${(count.index+1)}",
-      "CrowdSec workshop",
-      var.do_image_defender
+      (count.index<9) ? "defender0${(count.index+1)}" : "defender${(count.index+1)}"
   ]
 }
 # Firewall attacker
