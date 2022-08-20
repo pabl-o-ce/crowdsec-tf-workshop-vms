@@ -1,7 +1,7 @@
 # Workshop attacker instance
 resource "digitalocean_droplet" "crowdsec_instance_attacker" {
   # Add number of instances
-  count                         = (var.mio_cloud_provider == "do") ? var.do_number_of_instances : 0
+  count                         = (var.mio_cloud_provider_attacker == "do") ? var.mio_number_users : 0
   # Add region
   region                        = var.do_region
   # Add image type "ubuntu-18-04-x64"
@@ -21,7 +21,7 @@ resource "digitalocean_droplet" "crowdsec_instance_attacker" {
 # Workshop defender instance
 resource "digitalocean_droplet" "crowdsec_instance_defender" {
   # Add number of instances
-  count                         = (var.mio_cloud_provider == "do") ? var.do_number_of_instances : 0
+  count                         = (var.mio_cloud_provider_defender == "do") ? var.mio_number_users : 0
   # Add region
   region                        = var.do_region
   # Add image type "ubuntu-18-04-x64"
@@ -40,7 +40,7 @@ resource "digitalocean_droplet" "crowdsec_instance_defender" {
 # Firewall attacker
 resource "digitalocean_firewall" "crowdsec_firewall_attacker" {
   name                          = "crowdsec-workshop-attacker-firewall"
-  droplet_ids                   = concat(digitalocean_droplet.crowdsec_instance_attacker[*].id)
+  droplet_ids                   = (var.mio_cloud_provider_attacker == "do") ? concat(digitalocean_droplet.crowdsec_instance_attacker[*].id) : []
   inbound_rule {
     port_range              = "22"
     protocol                = "tcp"
@@ -55,7 +55,7 @@ resource "digitalocean_firewall" "crowdsec_firewall_attacker" {
 # Firewall defender
 resource "digitalocean_firewall" "crowdsec_firewall_defender" {
   name                          = "crowdsec-workshop-defender-firewall"
-  droplet_ids                   = concat(digitalocean_droplet.crowdsec_instance_defender[*].id)
+  droplet_ids                   = (var.mio_cloud_provider_attacker == "do") ? concat(digitalocean_droplet.crowdsec_instance_defender[*].id) : []
   inbound_rule {
     port_range              = "80"
     protocol                = "tcp"

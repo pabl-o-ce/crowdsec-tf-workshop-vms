@@ -1,7 +1,12 @@
 #####     Cloud Provider     #####
 
-variable "mio_cloud_provider" {
-        description = "Select cloud provider:  aws | tsp [transip]"
+variable "mio_cloud_provider_attacker" {
+        description = "Select cloud provider:  aws | do [Digital Ocean] | tsp [transip]"
+        sensitive = true
+        type = string
+}
+variable "mio_cloud_provider_defender" {
+        description = "Select cloud provider:  aws | do [Digital Ocean] | tsp [transip]"
         sensitive = true
         type = string
 }
@@ -12,6 +17,11 @@ variable "mio_dns_provider" {
 }
 variable "mio_user_data_path" {
         description = "Select path to user-data folder"
+        sensitive = true
+        type = string
+}
+variable "mio_number_users" {
+        description = "Select number of instance"
         sensitive = true
         type = string
 }
@@ -37,11 +47,11 @@ variable "aws_region" {
         type = string
 }
 # Number of instances variable definition
-variable "aws_number_of_instances" {
-        description = "number of instances to be created"
-        type = number
-        sensitive = true
-}
+# variable "aws_number_of_instances" {
+#         description = "number of instances to be created"
+#         type = number
+#         sensitive = true
+# }
 # AWS Instance type variable definition
 variable "aws_instance_type" {
         description = "AWS Instance type for EC2"
@@ -103,11 +113,11 @@ variable "tsp_region" {
         sensitive = true
 }
 # TransIP number of instances
-variable "tsp_number_of_instances" {
-        description = "number of instances to be created"
-        type = number
-        sensitive = true
-}
+# variable "tsp_number_of_instances" {
+#         description = "number of instances to be created"
+#         type = number
+#         sensitive = true
+# }
 # TransIP type of vm instances
 variable "tsp_instance_type" {
         description = "TransIP type of vm instance"
@@ -148,11 +158,11 @@ variable "do_region" {
         sensitive = true
 }
 # Digital Ocean number of instances
-variable "do_number_of_instances" {
-        description = "number of instances to be created"
-        type = number
-        sensitive = true
-}
+# variable "do_number_of_instances" {
+#         description = "number of instances to be created"
+#         type = number
+#         sensitive = true
+# }
 # Digital Ocean instance type
 variable "do_instance_type" {
         description = "Digital Ocean instance type"

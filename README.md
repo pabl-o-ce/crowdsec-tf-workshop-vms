@@ -1,14 +1,15 @@
 ![CrowdSec](https://app.crowdsec.net/vectors/crowdsec.svg "CrowdSec Logo") 
 # Crowdsec Terraform for workshops
 ## Cloud provider
-- **mio_cloud_provider** set in [__***terraform.tfvars***__] file
+- **mio_cloud_provider_attacker** set in [__***terraform.tfvars***__] file
+- **mio_cloud_provider_defender** set in [__***terraform.tfvars***__] file
 - **mio_dns_provider** set in [__***terraform.tfvars***__] file
 - **mio_user_data_path** set in [__***terraform.tfvars***__] file
+- **mio_number_users** set in [__***terraform.tfvars***__] file
 ## AWS
 - **aws_access_key:** set in [__***terraform.tfvars***__] file
 - **aws_secret_key:** set in [__***terraform.tfvars***__] file
 - **aws_region:** set in [__***terraform.tfvars***__] file
-- **aws_number_of_instances:** set in [__***terraform.tfvars***__] file
 - **aws_instance_type:** set in [__***terraform.tfvars***__] file
 - **aws_image_attacker:** set in [__***terraform.tfvars***__] file
 - **aws_image_defender:** set in [__***terraform.tfvars***__] file
@@ -22,7 +23,6 @@
 ## Digital Ocean
 - **do_token:** set in [__***terraform.tfvars***__] file
 - **do_region:** set in [__***terraform.tfvars***__] file
-- **do_number_of_instances:** set in [__***terraform.tfvars***__] file
 - **do_instance_type:** set in [__***terraform.tfvars***__] file
 - **do_image_attacker:** set in [__***terraform.tfvars***__] file
 - **do_image_defender:** set in [__***terraform.tfvars***__] file
@@ -31,7 +31,6 @@
 - **private_key:** need to be generated as file with name transip.pem
 - **tsp_account:** set in [__***terraform.tfvars***__] file
 - **tsp_region:** = set in [__***terraform.tfvars***__] file
-- **tsp_number_of_instances:** set in [__***terraform.tfvars***__] file
 - **tsp_instance_type:** set in [__***terraform.tfvars***__] file
 - **tsp_image_attacker:** set in [__***terraform.tfvars***__] file
 - **tsp_image_defender:** set in [__***terraform.tfvars***__] file
@@ -46,14 +45,17 @@ touch ./terraform.tfvars
 Add variables:
 ```sh
 echo -e "#####     Cloud Provider     #####
-mio_cloud_provider = \"<aws || tsp>\"
-mio_dns_provider = \"<cf || tsp>\"
+# options: aws | do | tsp
+mio_cloud_provider_attacker = \"<aws | do | tsp>\"
+mio_cloud_provider_defender = \"<aws | do | tsp>\"
+# options: cf | tsp
+mio_dns_provider = \"<cf | tsp>\"
 mio_user_data_path = \"./user-data\"
+mio_number_users = 1
 #####     AWS     #####
 aws_access_key = \"<accessKey>\"
 aws_secret_key = \"<secretKey>\"
 aws_region = \"<region>\"
-aws_number_of_instances = 0
 aws_instance_type = \"<instanceType>\"
 aws_image_attacker = \"<amiId>\"
 aws_image_defender = \"<amiId>\"
@@ -64,16 +66,14 @@ cf_token = \"<cf_token>\"
 cf_zone_id = \"<cf_zone_id>\"
 #####     TransIP     #####
 tsp_account = \"<tsp_account>\"
-tsp_region = \"<tsp_available_zone = rtm0>\"
-tsp_number_of_instances = 0
-tsp_instance_type = \"<tsp_instance_type = vps-bladevps-xs>\"
+tsp_region = \"<rtm0>\"
+tsp_instance_type = \"<vps-bladevps-xs>\"
 tsp_image_attacker = \"<tsp_attacker_image = ubuntu-22.04>\"
 tsp_image_defender = \"<tsp_defender_image = ubuntu-22.04>\"
 tsp_domain = \"<tsp_domain>\"
 #####     Digital Ocean     #####
 do_token = \"<do_token>\"
 do_region = \"<do_region>\"
-do_number_of_instances = 0
 do_instance_type = \"<do_instance_type>\"
 do_image_attacker = \"<do_attacker_image>\"
 do_image_defender = \"<do_defender_image>\"" > ./terraform.tfvars

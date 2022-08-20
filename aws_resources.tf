@@ -1,7 +1,7 @@
 # Workshop attacker instance
 resource "aws_instance" "crowdsec_instance_attacker" {
   # Add number of instances
-  count                       = (var.mio_cloud_provider == "aws") ? var.aws_number_of_instances : 0
+  count                       = (var.mio_cloud_provider_attacker == "aws") ? var.mio_number_users : 0
   # Add image type
   ami                         = var.aws_image_attacker
   # Add instances type
@@ -22,7 +22,7 @@ resource "aws_instance" "crowdsec_instance_attacker" {
 # Workshop defender instance
 resource "aws_instance" "crowdsec_instance_defender" {
   # Add number of instances
-  count                       = (var.mio_cloud_provider == "aws") ? var.aws_number_of_instances : 0
+  count                       = (var.mio_cloud_provider_defender == "aws") ? var.mio_number_users : 0
   # Add image type
   ami                         = var.aws_image_defender
   # Add instance type
@@ -43,16 +43,16 @@ resource "aws_instance" "crowdsec_instance_defender" {
 # Security group already defined for AWS attacker instances
 resource "aws_network_interface_sg_attachment" "sg_attachment_attacker" {
   # Add number of instances
-  count                       = (var.mio_cloud_provider == "aws") ? var.aws_number_of_instances : 0
+  count                       = (var.mio_cloud_provider_attacker == "aws") ? var.mio_number_users : 0
   # Add security group id
   security_group_id           = var.aws_security_group_ids
   # Add network interface id attachment to instances
   network_interface_id        = aws_instance.crowdsec_instance_attacker[count.index].primary_network_interface_id
 }
 # Security group already defined for AWS defender instances
-resource "aws_network_interface_sg_attachment" "sg_attachment_defense" {
+resource "aws_network_interface_sg_attachment" "sg_attachment_defender" {
   # Add number of instances
-  count                       = (var.mio_cloud_provider == "aws") ? var.aws_number_of_instances : 0
+  count                       = (var.mio_cloud_provider_defender == "aws") ? var.mio_number_users : 0
   # Add security group id
   security_group_id           = var.aws_security_group_ids
   # Add network interface id attachment to instances
