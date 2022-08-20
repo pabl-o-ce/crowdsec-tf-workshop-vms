@@ -46,12 +46,12 @@ resource "digitalocean_firewall" "crowdsec_firewall_attacker" {
   name                          = "crowdsec-workshop-attacker-firewall"
   droplet_ids                   = concat(digitalocean_droplet.crowdsec_instance_attacker[*].id)
   inbound_rule {
-    port                    = "22"
+    port_range              = "22"
     protocol                = "tcp"
     source_addresses        = ["0.0.0.0/0", "::/0"]
   }
   inbound_rule {
-    port                    = "8080"
+    port_range              = "8080"
     protocol                = "tcp"
     source_addresses        = ["0.0.0.0/0", "::/0"]
   }
@@ -61,32 +61,32 @@ resource "digitalocean_firewall" "crowdsec_firewall_defender" {
   name                          = "crowdsec-workshop-defender-firewall"
   droplet_ids                   = concat(digitalocean_droplet.crowdsec_instance_defender[*].id)
   inbound_rule {
-    port                    = "80"
+    port_range              = "80"
     protocol                = "tcp"
     source_addresses        = ["0.0.0.0/0", "::/0"]
   }
   inbound_rule {
-    port                    = "443"
+    port_range              = "443"
     protocol                = "tcp"
     source_addresses        = ["0.0.0.0/0", "::/0"]
   }
   inbound_rule {
-    port                    = "3000"
+    port_range              = "3000"
     protocol                = "tcp"
     source_addresses        = ["0.0.0.0/0", "::/0"]
   }
   inbound_rule {
-    port                    = "4000"
+    port_range              = "4000"
     protocol                = "tcp"
     source_addresses        = ["0.0.0.0/0", "::/0"]
   }
    inbound_rule {
-    port                    = "5000"
+    port_range              = "5000"
     protocol                = "tcp"
     source_addresses        = ["0.0.0.0/0", "::/0"]
   }
   inbound_rule {
-    port                    = "22"
+    port_range              = "22"
     protocol                = "tcp"
     source_addresses        = ["0.0.0.0/0", "::/0"]
   }
