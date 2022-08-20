@@ -18,6 +18,7 @@
 - **cf_zone_id:** set in [__***terraform.tfvars***__] file
 - **cf_token:** set in [__***terraform.tfvars***__] file
 ## TransIP
+- **private_key:** need to be generated as file with name transip.pem
 - **tsp_account:** set in [__***terraform.tfvars***__] file
 - **tsp_type:** set in [__***terraform.tfvars***__] file
 - **tsp_image_attacker:** set in [__***terraform.tfvars***__] file
@@ -53,11 +54,10 @@ cf_token = \"<cf_token>\"
 #####     TransIP     #####
 tsp_number_of_instances = \"<tsp_number_instances>\"
 tsp_account = \"<tsp_account>\"
-tsp_key = \"<tsp_key>\"
-tsp_type = \"<tsp_instance_type>\"
-tsp_image_attacker = \"<tsp_attacker_image>\"
-tsp_image_defender = \"<tsp_defender_image>\"
-tsp_azone = \"<tsp_available_zone>\"" > ./terraform.tfvars
+tsp_type = \"<tsp_instance_type = vps-bladevps-xs>\"
+tsp_image_attacker = \"<tsp_attacker_image = ubuntu-22.04>\"
+tsp_image_defender = \"<tsp_defender_image = ubuntu-22.04>\"
+tsp_azone = \"<tsp_available_zone = rtm0>\"" > ./terraform.tfvars
 ```
 ### Terraform
 #### Init Terraform
