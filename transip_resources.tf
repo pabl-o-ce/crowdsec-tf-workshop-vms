@@ -3,9 +3,9 @@ resource "transip_vps" "crowdsec_instance_attacker" {
   # Add number of instances
   count                         = (var.mio_cloud_provider == "tsp") ? var.tsp_number_of_instances : 0
   # Availability zone
-  availability_zone             = var.tsp_azone
+  availability_zone             = var.tsp_region
   # Add instances type
-  product_name                  = var.tsp_type
+  product_name                  = var.tsp_instance_type
   # Add image type
   operating_system              = var.tsp_image_attacker
   # Add cloud-init on user-data folder
@@ -23,9 +23,9 @@ resource "transip_vps" "crowdsec_instance_defender" {
   # Add number of instances
   count                         = (var.mio_cloud_provider == "tsp") ? var.tsp_number_of_instances : 0
   # Availability zone
-  availability_zone             = var.tsp_azone
+  availability_zone             = var.tsp_region
   # Add instances type
-  product_name                  = var.tsp_type
+  product_name                  = var.tsp_instance_type
   # Add image type
   operating_system              = var.tsp_image_defender
   # Add cloud-init on user-data folder
@@ -96,7 +96,7 @@ data "transip_domain" "crowdsec_domain" {
 }
 # DNS attacker records
 resource "transip_dns_record" "crowdsec_records_attacker" {
-  for_each                      = (var.mio_cloud_provider == "tsp" && var.mio_dns_provider == "tsp") ? zipmap( transip_vps.crowdsec_instance_attacker[*].description, transip_vps.crowdsec_instance_attacker[*].ip_address ) : (var.mio_cloud_provider == "aws" && var.mio_dns_provider == "tsp") ? zipmap( aws_instance.crowdsec_instance_attacker[*].tags.Name, aws_instance.crowdsec_instance_attacker[*].public_ip ) : {}
+  for_each                      = (var.mio_cloud_provider == "tsp" && var.mio_dns_provider == "tsp") ? zipmap( transip_vps.crowdsec_instance_attacker[*].description, transip_vps.crowdsec_instance_attacker[*].ip_address ) : (var.mio_cloud_provider == "aws" && var.mio_dns_provider == "tsp") ? zipmap( aws_instance.crowdsec_instance_attacker[*].tags.Name, aws_instance.crowdsec_instance_attacker[*].public_ip ) : (var.mio_cloud_provider == "do" && var.mio_dns_provider == "tsp") ? zipmap( digitalocean_droplet.crowdsec_instance_attacker[*].name, digitalocean_droplet.crowdsec_instance_attacker[*].ipv4_address ) : {}
   name                          = each.key
   content                       = ["${each.value}"]
   domain                        = data.transip_domain.crowdsec_domain.id
@@ -104,7 +104,7 @@ resource "transip_dns_record" "crowdsec_records_attacker" {
 }
 # DNS defender records
 resource "transip_dns_record" "crowdsec_records_defender" {
-  for_each                      = (var.mio_cloud_provider == "tsp" && var.mio_dns_provider == "tsp") ? zipmap( transip_vps.crowdsec_instance_defender[*].description, transip_vps.crowdsec_instance_defender[*].ip_address ) : (var.mio_cloud_provider == "aws" && var.mio_dns_provider == "tsp") ?  zipmap( aws_instance.crowdsec_instance_defender[*].tags.Name, aws_instance.crowdsec_instance_defender[*].public_ip ) : {}
+  for_each                      = (var.mio_cloud_provider == "tsp" && var.mio_dns_provider == "tsp") ? zipmap( transip_vps.crowdsec_instance_defender[*].description, transip_vps.crowdsec_instance_defender[*].ip_address ) : (var.mio_cloud_provider == "aws" && var.mio_dns_provider == "tsp") ?  zipmap( aws_instance.crowdsec_instance_defender[*].tags.Name, aws_instance.crowdsec_instance_defender[*].public_ip ) : (var.mio_cloud_provider == "do" && var.mio_dns_provider == "tsp") ? zipmap( digitalocean_droplet.crowdsec_instance_defender[*].name, digitalocean_droplet.crowdsec_instance_defender[*].ipv4_address )  : {}
   name                          = each.key
   content                       = ["${each.value}"]
   domain                        = data.transip_domain.crowdsec_domain.id

@@ -7,10 +7,10 @@ provider "aws" {
   secret_key = "${var.aws_secret_key}"
 }
 # Digital Ocean provider
-# provider "digitalocean" {
-#   # Add Digital Ocean token
-#   token = var.do_token
-# }
+provider "digitalocean" {
+  # Add Digital Ocean token
+  token = var.do_token
+}
 # Cloudflare provider
 provider "cloudflare" {
   # Add Cloudflare token

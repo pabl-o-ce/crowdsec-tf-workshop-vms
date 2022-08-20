@@ -3,20 +3,20 @@ resource "aws_instance" "crowdsec_instance_attacker" {
   # Add number of instances
   count                       = (var.mio_cloud_provider == "aws") ? var.aws_number_of_instances : 0
   # Add image type
-  ami                         = var.aws_ami_attack
+  ami                         = var.aws_image_attacker
   # Add instances type
   instance_type               = var.aws_instance_type
   # Add key name
   key_name                    = "${var.aws_key_name}"
   # Add public ip
   associate_public_ip_address = true
-  # Add cloud-init on user-data folder
+  # Add cloud-init
   user_data                   = file("${var.mio_user_data_path}/workshop-attack.yml")
   # Add tags
   tags = {
       Name                    = (count.index<9) ? "attacker0${(count.index+1)}" : "attacker${(count.index+1)}"
       Environment             = "CrowdSec workshop"
-      OS                      = var.aws_ami_attack
+      OS                      = var.aws_image_attacker
   }
 }
 # Workshop defender instance
@@ -24,20 +24,20 @@ resource "aws_instance" "crowdsec_instance_defender" {
   # Add number of instances
   count                       = (var.mio_cloud_provider == "aws") ? var.aws_number_of_instances : 0
   # Add image type
-  ami                         = var.aws_ami_defense
+  ami                         = var.aws_image_defender
   # Add instance type
   instance_type               = var.aws_instance_type
   # Add key name
   key_name                    = "${var.aws_key_name}"
   # Add public ip
   associate_public_ip_address = true
-  # Add cloud-init on user-data folder
-  user_data                   = file("${var.mio_user_data_path}/user-data/workshop-blank.yml")
+  # Add cloud-init
+  user_data                   = file("${var.mio_user_data_path}/workshop-blank.yml")
   # Add tags
   tags = {
       Name                    = (count.index<9) ? "defender0${(count.index+1)}" : "defender${(count.index+1)}"
       Environment             = "CrowdSec workshop"
-      OS                      = var.aws_ami_defense
+      OS                      = var.aws_image_defender
   }
 }
 # Security group already defined for AWS attacker instances
