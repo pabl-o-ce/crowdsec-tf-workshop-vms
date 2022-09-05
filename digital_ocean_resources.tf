@@ -39,6 +39,7 @@ resource "digitalocean_droplet" "crowdsec_instance_defender" {
 }
 # Firewall attacker
 resource "digitalocean_firewall" "crowdsec_firewall_attacker" {
+  count                         = "${var.mio_cloud_provider_attacker == "do" ? 1 : 0}"
   name                          = "crowdsec-workshop-attacker-firewall"
   droplet_ids                   = (var.mio_cloud_provider_attacker == "do") ? concat(digitalocean_droplet.crowdsec_instance_attacker[*].id) : []
   inbound_rule {
@@ -54,8 +55,9 @@ resource "digitalocean_firewall" "crowdsec_firewall_attacker" {
  }
 # Firewall defender
 resource "digitalocean_firewall" "crowdsec_firewall_defender" {
+  count                         = "${var.mio_cloud_provider_defender == "do" ? 1 : 0}"
   name                          = "crowdsec-workshop-defender-firewall"
-  droplet_ids                   = (var.mio_cloud_provider_attacker == "do") ? concat(digitalocean_droplet.crowdsec_instance_defender[*].id) : []
+  droplet_ids                   = (var.mio_cloud_provider_defender == "do") ? concat(digitalocean_droplet.crowdsec_instance_defender[*].id) : []
   inbound_rule {
     port_range              = "80"
     protocol                = "tcp"
