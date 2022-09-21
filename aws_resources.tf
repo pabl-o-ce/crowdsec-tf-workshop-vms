@@ -45,14 +45,6 @@ resource "aws_instance" "crowdsec_instance_defender" {
       OS                      = var.aws_image_defender
   }
 }
-# EBS volume
-resource "aws_ebs_volume" "crowdsec_volume" {
-  availability_zone = var.aws_region
-  size              = 30
-  tags = {
-    Name = "CrowdSec"
-  }
-}
 # Security group already defined for AWS attacker instances
 resource "aws_network_interface_sg_attachment" "sg_attachment_attacker" {
   # Add number of instances
