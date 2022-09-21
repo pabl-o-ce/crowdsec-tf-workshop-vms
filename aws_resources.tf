@@ -12,6 +12,11 @@ resource "aws_instance" "crowdsec_instance_attacker" {
   associate_public_ip_address = true
   # Add cloud-init
   user_data                   = file("${var.mio_user_data_path}/workshop-attack.yml")
+  # EBS Volume
+  ebs_block_device {
+    device_name = "/dev/sda1"
+    volume_size = 32
+  }
   # Add tags
   tags = {
       Name                    = (count.index<9) ? "attacker0${(count.index+1)}" : "attacker${(count.index+1)}"
@@ -38,6 +43,14 @@ resource "aws_instance" "crowdsec_instance_defender" {
       Name                    = (count.index<9) ? "defender0${(count.index+1)}" : "defender${(count.index+1)}"
       Environment             = "CrowdSec workshop"
       OS                      = var.aws_image_defender
+  }
+}
+# EBS volume
+resource "aws_ebs_volume" "crowdsec_volume" {
+  availability_zone = var.aws_region
+  size              = 30
+  tags = {
+    Name = "CrowdSec"
   }
 }
 # Security group already defined for AWS attacker instances
