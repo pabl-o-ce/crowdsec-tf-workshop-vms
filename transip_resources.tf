@@ -1,4 +1,7 @@
-# Workshop attacker instance
+# ------------------------- #
+# Workshop Attack-Defense
+# ------------------------- #
+# Attacker instance
 resource "transip_vps" "crowdsec_instance_attacker" {
   # Add number of instances
   count                         = (var.mio_cloud_provider_attacker == "tsp") ? var.mio_number_users : 0
@@ -18,7 +21,7 @@ resource "transip_vps" "crowdsec_instance_attacker" {
   #     OS                      = "debian-11"
   # }
 }
-# Workshop defender instance
+# Defender instance
 resource "transip_vps" "crowdsec_instance_defender" {
   # Add number of instances
   count                         = (var.mio_cloud_provider_defender == "tsp") ? var.mio_number_users : 0
@@ -48,12 +51,12 @@ resource "transip_vps_firewall" "crowdsec_firewall_attacker" {
     port                  = "22"
     protocol              = "tcp"
   }
-    inbound_rule {
+  inbound_rule {
     description           = "HTTP#1"
     port                  = "8080"
     protocol              = "tcp"
   }
- }
+}
 # Firewall defender
 resource "transip_vps_firewall" "crowdsec_firewall_defender" {
   for_each                      = zipmap( transip_vps.crowdsec_instance_defender[*].description, transip_vps.crowdsec_instance_defender[*].name )
@@ -90,6 +93,7 @@ resource "transip_vps_firewall" "crowdsec_firewall_defender" {
     protocol              = "tcp"
   }
 }
+
 # Domain as data resource instead
 data "transip_domain" "crowdsec_domain" {
   name                          = var.tsp_domain
@@ -105,6 +109,44 @@ resource "transip_dns_record" "crowdsec_records_attacker" {
 # DNS defender records
 resource "transip_dns_record" "crowdsec_records_defender" {
   for_each                      = (var.mio_cloud_provider_defender == "tsp" && var.mio_dns_provider == "tsp") ? zipmap( transip_vps.crowdsec_instance_defender[*].description, transip_vps.crowdsec_instance_defender[*].ip_address ) : (var.mio_cloud_provider_defender == "aws" && var.mio_dns_provider == "tsp") ?  zipmap( aws_instance.crowdsec_instance_defender[*].tags.Name, aws_instance.crowdsec_instance_defender[*].public_ip ) : (var.mio_cloud_provider_defender == "do" && var.mio_dns_provider == "tsp") ? zipmap( digitalocean_droplet.crowdsec_instance_defender[*].name, digitalocean_droplet.crowdsec_instance_defender[*].ipv4_address )  : {}
+  name                          = each.key
+  content                       = ["${each.value}"]
+  domain                        = data.transip_domain.crowdsec_domain.id
+  type                          = "A"
+}
+# ------------------------- #
+# Workshop Scenarios Parsers
+# ------------------------- #
+# Scenarios Parsers instance
+resource "transip_vps" "crowdsec_instance_scenarios_parsers" {
+  # Add number of instances
+  count                         = (var.mio_cloud_provider_scenarios_parsers == "tsp") ? var.mio_number_users : 0
+  # Availability zone
+  availability_zone             = var.tsp_region
+  # Add instances type
+  product_name                  = var.tsp_instance_type
+  # Add image type
+  operating_system              = var.tsp_image_scenarios_parsers
+  # Add cloud-init on user-data folder
+  install_text                  = file("${var.mio_user_data_path}/scenarios-parsers.yml")
+  # Add description name
+  description                   = (count.index<9) ? "scenarios-parsers0${(count.index+1)}" : "scenarios-parsers${(count.index+1)}"
+}
+# Firewall Scenarios/Parsers
+resource "transip_vps_firewall" "crowdsec_firewall_scenarios_parsers" {
+  for_each                      = zipmap( transip_vps.crowdsec_instance_scenarios_parsers[*].description, transip_vps.crowdsec_instance_scenarios_parsers[*].name )
+  vps_name                      = each.value
+  is_enabled                    = true
+
+  inbound_rule {
+    description           = "SSH"
+    port                  = "22"
+    protocol              = "tcp"
+  }
+}
+# DNS defender records
+resource "transip_dns_record" "crowdsec_records_scenarios_parsers" {
+  for_each                      = (var.mio_cloud_provider_scenarios_parsers == "tsp" && var.mio_dns_provider == "tsp") ? zipmap( transip_vps.crowdsec_instance_scenarios_parsers[*].description, transip_vps.crowdsec_instance_scenarios_parsers[*].ip_address ) : (var.mio_cloud_provider_scenarios_parsers == "aws" && var.mio_dns_provider == "tsp") ?  zipmap( aws_instance.crowdsec_instance_scenarios_parsers[*].tags.Name, aws_instance.crowdsec_instance_scenarios_parsers[*].public_ip ) : (var.mio_cloud_provider_scenarios_parsers == "do" && var.mio_dns_provider == "tsp") ? zipmap( digitalocean_droplet.crowdsec_instance_scenarios_parsers[*].name, digitalocean_droplet.crowdsec_instance_scenarios_parsers[*].ipv4_address )  : {}
   name                          = each.key
   content                       = ["${each.value}"]
   domain                        = data.transip_domain.crowdsec_domain.id

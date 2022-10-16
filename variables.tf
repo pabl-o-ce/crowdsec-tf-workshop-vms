@@ -1,11 +1,21 @@
 #####     Cloud Provider     #####
 
+variable "mio_workshop" {
+        description = "Select workshop env:  attack-defense | scenarios-parsers"
+        sensitive = true
+        type = string
+}
 variable "mio_cloud_provider_attacker" {
         description = "Select cloud provider:  aws | do [Digital Ocean] | tsp [transip]"
         sensitive = true
         type = string
 }
 variable "mio_cloud_provider_defender" {
+        description = "Select cloud provider:  aws | do [Digital Ocean] | tsp [transip]"
+        sensitive = true
+        type = string
+}
+variable "mio_cloud_provider_scenarios_parsers" {
         description = "Select cloud provider:  aws | do [Digital Ocean] | tsp [transip]"
         sensitive = true
         type = string
@@ -58,6 +68,12 @@ variable "aws_instance_type" {
         sensitive = true
         type = string
 }
+# AWS Instance type variable definition
+variable "aws_instance_type_defense" {
+        description = "AWS Instance type for EC2"
+        default = "true"
+        type = string
+}
 # AMI ID variable attacker definition
 variable "aws_image_attacker" {
         description = "The AMI to use for Attack"
@@ -67,6 +83,12 @@ variable "aws_image_attacker" {
 # AMI ID variable defense definition
 variable "aws_image_defender" {
         description = "The AMI to use for Defense"
+        sensitive = true
+        type = string
+}
+# AMI ID variable Scenarios and Parsers definition
+variable "aws_image_scenarios_parsers" {
+        description = "The AMI to use for Scenarios and Parsers"
         sensitive = true
         type = string
 }
@@ -136,6 +158,12 @@ variable "tsp_image_defender" {
         type = string
         sensitive = true
 }
+# AMI ID variable Scenarios and Parsers definition
+variable "tsp_image_scenarios_parsers" {
+        description = "The AMI to use for Scenarios and Parsers"
+        sensitive = true
+        type = string
+}
 # TransIP defender OS
 variable "tsp_domain" {
         description = "Transip Domain"
@@ -180,4 +208,10 @@ variable "do_image_defender" {
         description = "Digital Ocean defender image"
         type = string
         sensitive = true
+}
+# AMI ID variable Scenarios and Parsers definition
+variable "do_image_scenarios_parsers" {
+        description = "The AMI to use for Scenarios and Parsers"
+        sensitive = true
+        type = string
 }
