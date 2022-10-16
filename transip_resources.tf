@@ -128,7 +128,7 @@ resource "transip_vps" "crowdsec_instance_scenarios_parsers" {
   # Add image type
   operating_system              = var.tsp_image_scenarios_parsers
   # Add cloud-init on user-data folder
-  install_text                  = file("${var.mio_user_data_path}/scenarios-parsers.yml")
+  install_text                  = file("${var.mio_user_data_path}/vps-crowdsec.yml")
   # Add description name
   description                   = (count.index<9) ? "scenarios-parsers0${(count.index+1)}" : "scenarios-parsers${(count.index+1)}"
 }

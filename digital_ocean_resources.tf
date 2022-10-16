@@ -108,7 +108,7 @@ resource "digitalocean_droplet" "crowdsec_instance_scenarios_parsers" {
   # Add name
   name                          = (count.index<9) ? "scenarios-parsers0${(count.index+1)}" : "scenarios-parsers${(count.index+1)}"
   # Add cloud-init
-  user_data                     = file("${var.mio_user_data_path}/workshop-scenarios-parsers.yml")
+  user_data                     = file("${var.mio_user_data_path}/vps-crowdsec.yml")
   # Add tags
   tags = [
       (count.index<9) ? "scenarios-parsers0${(count.index+1)}" : "scenarios-parsers${(count.index+1)}"

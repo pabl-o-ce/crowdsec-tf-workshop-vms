@@ -82,7 +82,7 @@ resource "aws_instance" "crowdsec_instance_scenarios_parsers" {
   # Add public ip
   associate_public_ip_address = true
   # Add cloud-init
-  user_data                   = file("${var.mio_user_data_path}/scenarios-parsers.yml")
+  user_data                   = file("${var.mio_user_data_path}/vps-crowdsec.yml")
   # Add tags
   tags = {
       Name                    = (count.index<9) ? "scenarios-parsers0${(count.index+1)}" : "scenarios-parsers${(count.index+1)}"
