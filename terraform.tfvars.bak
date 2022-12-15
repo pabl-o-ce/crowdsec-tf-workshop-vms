@@ -1,0 +1,45 @@
+#####     Cloud Provider     #####
+
+# options: aws | do | tsp
+mio_cloud_provider_attacker = "aws"
+mio_cloud_provider_defender = "aws"
+# options: cf | tsp
+mio_dns_provider = "cf"
+mio_user_data_path = "../cloud-init"
+mio_number_users = 10
+
+#####     AWS     #####
+
+aws_access_key = "AKIAUP5VSKTPPO6GHLPQ"
+aws_secret_key = "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"
+aws_region = "eu-central-1"
+aws_instance_type = "t2.small"
+aws_image_attacker = "ami-08f1052041d7006af" #kali
+aws_image_defender = "ami-0245697ee3e07e755" #debian11
+aws_key_name = "MyEC2KeyPair"
+#aws_security_group_ids = "sg-08ed5268bfc2d63a3" #only allow needed
+aws_security_group_ids = "sg-09255031515ebca25" #allow all traffic
+
+#####     TransIP     #####
+
+tsp_account = "klausagnoletti"
+tsp_region = "rtm0"
+tsp_instance_type = "vps-bladevps-xs"
+tsp_image_attacker = "ubuntu-22.04"
+tsp_image_defender = "debian11"
+#tsp_image_attacker = "debian-11"
+#tsp_image_defender = "ubuntu-18.04"
+tsp_domain = "crowdsecdemo.nl"
+
+#####     Digital Ocean     #####
+
+do_token = "dop_v1_f0dc95ab059ef6b97543cb1242e207b3c01fe32e9a044fa2ac02a824e064f726"
+do_region = "fra1"
+do_instance_type = "s-1vcpu-1gb"
+do_image_attacker = "ubuntu-22-04-x64"
+do_image_defender = "debian-11-x64"
+
+#####     Cloudflare     #####
+
+cf_token  = "Cpg_qTosCrYriTMfhBMvIEBSMu6F-ZHHl35feMfs"
+cf_zone_id = "81720143e084b2d084a112df038fc089"

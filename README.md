@@ -1,12 +1,17 @@
-![CrowdSec](https://app.crowdsec.net/vectors/crowdsec.svg "CrowdSec Logo") 
+![CrowdSec](https://app.crowdsec.net/vectors/crowdsec.svg "CrowdSec Logo")
+
 # Crowdsec Terraform for workshops
+
 ## Cloud provider
+
 - **mio_cloud_provider_attacker** set in [__***terraform.tfvars***__] file
 - **mio_cloud_provider_defender** set in [__***terraform.tfvars***__] file
 - **mio_dns_provider** set in [__***terraform.tfvars***__] file
 - **mio_user_data_path** set in [__***terraform.tfvars***__] file
 - **mio_number_users** set in [__***terraform.tfvars***__] file
+
 ## AWS
+
 - **aws_access_key:** set in [__***terraform.tfvars***__] file
 - **aws_secret_key:** set in [__***terraform.tfvars***__] file
 - **aws_region:** set in [__***terraform.tfvars***__] file
@@ -16,18 +21,24 @@
 - **aws_key_name:** set in [__***terraform.tfvars***__] file
 - **aws_security_group_ids:** set in [__***terraform.tfvars***__] file
 - [**API docs**](https://docs.aws.amazon.com/)
+
 ## Cloudflare
+
 - **cf_token:** set in [__***terraform.tfvars***__] file
 - **cf_zone_id:** set in [__***terraform.tfvars***__] file
 - [**API docs**](https://api.cloudflare.com/)
+
 ## Digital Ocean
+
 - **do_token:** set in [__***terraform.tfvars***__] file
 - **do_region:** set in [__***terraform.tfvars***__] file
 - **do_instance_type:** set in [__***terraform.tfvars***__] file
 - **do_image_attacker:** set in [__***terraform.tfvars***__] file
 - **do_image_defender:** set in [__***terraform.tfvars***__] file
 - [**API docs**](https://docs.digitalocean.com/reference/api/api-reference/)
+
 ## TransIP
+
 - **private_key:** need to be generated as file with name transip.pem
 - **tsp_account:** set in [__***terraform.tfvars***__] file
 - **tsp_region:** = set in [__***terraform.tfvars***__] file
@@ -38,11 +49,15 @@
 - [**API docs**](https://api.transip.nl/rest/docs.html)
 
 ## Setup
+
 Once you get the keys you need to create and define terraform.tfvars:
+
 ```
 touch ./terraform.tfvars
 ```
+
 Add variables:
+
 ```sh
 echo -e "#####     Cloud Provider     #####
 # options: aws | do | tsp
@@ -78,29 +93,43 @@ do_instance_type = \"<do_instance_type>\"
 do_image_attacker = \"<do_attacker_image>\"
 do_image_defender = \"<do_defender_image>\"" > ./terraform.tfvars
 ```
+
 ### Terraform
+
 #### Init Terraform
+
 ```sh
 terraform init
 ```
+
 #### Check Terraform
+
 ```sh
 terraform plan --auto-approve
 ```
+
 #### Create Terraform
+
 ```sh
 terraform apply -var-file="terraform.tfvars" --auto-approve
 ```
+
 #### Delete using Terraform
+
 ```sh
 terraform destroy --auto-approve
 ```
+
 #### Output to CSV file
+
 Using `jq`
+
 ```
 terraform output -json crowdsec_workshop | jq -r '(map(keys) | add | unique) as $cols | map(. as $row | $cols | map($row[.])) as $rows | $cols, $rows[] | @csv' > output.csv
 ```
+
 Using `jsonv`
+
 ```
 terraform output -json crowdsec_workshop | jsonv dns,public_ip > output.csv
 ```

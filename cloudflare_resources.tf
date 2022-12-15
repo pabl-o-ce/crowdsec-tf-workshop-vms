@@ -55,3 +55,40 @@ resource "cloudflare_record" "scenarios_parsers_records" {
   # Add ttl
   ttl      = 1
 }
+# ------------------------- #
+# Workshop Demo
+# ------------------------- #
+# Cloudflare records for attackers vms IPv4
+resource "cloudflare_record" "demo_attacker_records" {
+  # AWS or TransIP output attacker vms variable
+  for_each = (var.mio_workshop == "demo" && var.mio_cloud_provider_demo_attacker == "aws" && var.mio_dns_provider == "cf") ? zipmap( aws_instance.crowdsec_instance_demo_attacker[*].tags.Name, aws_instance.crowdsec_instance_demo_attacker[*].public_ip ) : (var.mio_workshop == "demo" && var.mio_cloud_provider_demo_attacker == "tsp" && var.mio_dns_provider == "cf") ? zipmap( transip_vps.crowdsec_instance_demo_attacker[*].description, transip_vps.crowdsec_instance_demo_attacker[*].ip_address ) : (var.mio_workshop == "demo" && var.mio_cloud_provider_demo_attacker == "do" && var.mio_dns_provider == "cf") ? zipmap( digitalocean_droplet.crowdsec_instance_demo_attacker[*].name, digitalocean_droplet.crowdsec_instance_demo_attacker[*].ipv4_address ) : {}
+  # Add zone id
+  zone_id  = "${var.cf_zone_id}"
+  # Add name of subdomain record
+  name     = each.key
+  # Add public ip
+  value    = each.value
+  # Add type
+  type     = "A"
+  # Add proxy setup
+  proxied  = false
+  # Add ttl
+  ttl      = 1
+}
+# Cloudflare records for defenders vms IPv4
+resource "cloudflare_record" "demo_defender_records" {
+  # AWS output defender vms variable
+  for_each = (var.mio_workshop == "demo" && var.mio_cloud_provider_demo_defender == "aws" && var.mio_dns_provider == "cf") ?  zipmap( aws_instance.crowdsec_instance_demo_defender[*].tags.Name, aws_instance.crowdsec_instance_demo_defender[*].public_ip ) : (var.mio_workshop == "demo" && var.mio_cloud_provider_demo_defender == "tsp" && var.mio_dns_provider == "cf") ? zipmap( transip_vps.crowdsec_instance_demo_defender[*].description, transip_vps.crowdsec_instance_demo_defender[*].ip_address ) : (var.mio_workshop == "demo" && var.mio_cloud_provider_demo_defender == "do" && var.mio_dns_provider == "cf") ? zipmap( digitalocean_droplet.crowdsec_instance_demo_defender[*].name, digitalocean_droplet.crowdsec_instance_demo_defender[*].ipv4_address ) : {}
+  # Add zone id
+  zone_id  = "${var.cf_zone_id}"
+  # Add name of subdomain record
+  name     = each.key
+  # Add public ip
+  value    = each.value
+  # Add type
+  type     = "A"
+  # Add proxy setup
+  proxied  = false
+  # Add ttl
+  ttl      = 1
+}

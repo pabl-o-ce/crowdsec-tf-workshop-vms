@@ -1,7 +1,7 @@
 #####     Cloud Provider     #####
 
 variable "mio_workshop" {
-        description = "Select workshop env:  attack-defense | scenarios-parsers"
+        description = "Select workshop env:  attack-defense | scenarios-parsers | demo"
         sensitive = true
         type = string
 }
@@ -10,7 +10,17 @@ variable "mio_cloud_provider_attacker" {
         sensitive = true
         type = string
 }
+variable "mio_cloud_provider_demo_attacker" {
+        description = "Select cloud provider:  aws | do [Digital Ocean] | tsp [transip]"
+        sensitive = true
+        type = string
+}
 variable "mio_cloud_provider_defender" {
+        description = "Select cloud provider:  aws | do [Digital Ocean] | tsp [transip]"
+        sensitive = true
+        type = string
+}
+variable "mio_cloud_provider_demo_defender" {
         description = "Select cloud provider:  aws | do [Digital Ocean] | tsp [transip]"
         sensitive = true
         type = string
@@ -74,15 +84,33 @@ variable "aws_instance_type_defense" {
         default = "true"
         type = string
 }
+# AWS Instance type variable definition
+variable "aws_instance_type_demo_defense" {
+        description = "AWS Instance type for EC2 Demo"
+        default = "true"
+        type = string
+}
 # AMI ID variable attacker definition
 variable "aws_image_attacker" {
         description = "The AMI to use for Attack"
         sensitive = true
         type = string
 }
+# AMI ID variable attacker definition
+variable "aws_image_demo_attacker" {
+        description = "The AMI to use for Demo Attack"
+        sensitive = true
+        type = string
+}
 # AMI ID variable defense definition
 variable "aws_image_defender" {
         description = "The AMI to use for Defense"
+        sensitive = true
+        type = string
+}
+# AMI ID variable defense definition
+variable "aws_image_demo_defender" {
+        description = "The AMI to use for Demo Defense"
         sensitive = true
         type = string
 }
@@ -164,6 +192,18 @@ variable "tsp_image_scenarios_parsers" {
         sensitive = true
         type = string
 }
+# TransIP attacker OS
+variable "tsp_image_demo_attacker" {
+        description = "The AMI to use for demo attacker"
+        type = string
+        sensitive = true
+}
+# TransIP defender OS
+variable "tsp_image_demo_defender" {
+        description = "The AMI to use for demo defender"
+        type = string
+        sensitive = true
+}
 # TransIP defender OS
 variable "tsp_domain" {
         description = "Transip Domain"
@@ -214,4 +254,16 @@ variable "do_image_scenarios_parsers" {
         description = "The AMI to use for Scenarios and Parsers"
         sensitive = true
         type = string
+}
+# Digital Ocean attacker image
+variable "do_image_demo_attacker" {
+        description = "Digital Ocean attacker image"
+        type = string
+        sensitive = true
+}
+# Digital Ocean defender image
+variable "do_image_demo_defender" {
+        description = "Digital Ocean defender image"
+        type = string
+        sensitive = true
 }
