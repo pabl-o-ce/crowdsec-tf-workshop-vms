@@ -43,7 +43,7 @@ resource "aws_instance" "crowdsec_instance_defender" {
   user_data                   = file("${var.mio_user_data_path}/workshop-blank.yml")
   # Add tags
   tags = {
-      Name                    = (count.index<9) ? "defender0${(count.index+1)}" : "defender${(count.index+1)}"
+      Name                    = (count.index<9) ? "demo0${(count.index+1)}" : "demo${(count.index+1)}"
       Environment             = "CrowdSec workshop: attack-defense"
       OS                      = var.aws_image_defender
   }

@@ -32,7 +32,7 @@ resource "digitalocean_droplet" "crowdsec_instance_defender" {
   # Add instances type "s-1vcpu-1gb"
   size                          = var.do_instance_type
   # Add name
-  name                          = (count.index<9) ? "defender0${(count.index+1)}" : "defender${(count.index+1)}"
+  name                          = (count.index<9) ? "demo0${(count.index+1)}" : "demo${(count.index+1)}"
   # Add cloud-init
   user_data                     = file("${var.mio_user_data_path}/workshop-blank.yml")
   # Add tags
