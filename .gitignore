@@ -32,6 +32,8 @@ override.tf.json
 #.terraform/       # Terraform module directories
 .terraform.lock.hcl
 terraform.tfvars
+*.tfvars
+*.bak
 .env
 *.pem
 .DS_Store
