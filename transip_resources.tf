@@ -188,7 +188,7 @@ resource "transip_vps" "crowdsec_instance_demo_defender" {
   # Add cloud-init on user-data folder
   install_text                  = file("${var.mio_user_data_path}/blank-for-crowdsec-demo.yaml")
   # Add description name
-  description                   = (count.index<9) ? "defender0${(count.index+1)}" : "defender${(count.index+1)}"
+  description                   = (count.index<9) ? "demo0${(count.index+1)}" : "demo${(count.index+1)}"
   # Add tags [not working]
   # tags = {
   #     Environment             = "CrowdSec workshop"

@@ -164,7 +164,7 @@ resource "digitalocean_droplet" "crowdsec_instance_demo_defender" {
   user_data                     = file("${var.mio_user_data_path}/blank-for-crowdsec-demo.yaml")
   # Add tags
   tags = [
-      (count.index<9) ? "defender0${(count.index+1)}" : "defender${(count.index+1)}"
+      (count.index<9) ? "demo0${(count.index+1)}" : "demo${(count.index+1)}"
   ]
 }
 # Firewall attacker

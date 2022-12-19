@@ -135,7 +135,7 @@ resource "aws_instance" "crowdsec_instance_demo_defender" {
   user_data                   = file("${var.mio_user_data_path}/blank-for-crowdsec-demo.yaml")
   # Add tags
   tags = {
-      Name                    = (count.index<9) ? "defender0${(count.index+1)}" : "defender${(count.index+1)}"
+      Name                    = (count.index<9) ? "demo0${(count.index+1)}" : "demo${(count.index+1)}"
       Environment             = "CrowdSec workshop: demo"
       OS                      = var.aws_image_demo_defender
   }
